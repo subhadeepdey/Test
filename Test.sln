@@ -1,0 +1,97 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsole", "TestConsole\TestConsole.csproj", "{C42670BF-907F-4124-9ECA-1468EE3F5F51}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "TestWeb", "TestWeb\", "{D3FF88FC-D8C1-42EC-8FA1-5A436B37475D}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5.2"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_64800"
+		Debug.AspNetCompiler.PhysicalPath = "TestWeb\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_64800\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_64800"
+		Release.AspNetCompiler.PhysicalPath = "TestWeb\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_64800\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "64800"
+		SlnRelativePath = "TestWeb\"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWebApplication", "TestWebApplication\TestWebApplication.csproj", "{CC15E10D-1B66-437D-A19B-BED7A2F9329D}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "dotnetsaml", "http://localhost/dotnetsaml", "{431914CA-93BA-41C5-853F-EAD0F07C2E2E}"
+	ProjectSection(WebsiteProperties) = preProject
+		UseIISExpress = "false"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5.2"
+		Debug.AspNetCompiler.VirtualPath = "/dotnetsaml"
+		Debug.AspNetCompiler.PhysicalPath = "dotnetsaml\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\dotnetsaml\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/dotnetsaml"
+		Release.AspNetCompiler.PhysicalPath = "dotnetsaml\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\dotnetsaml\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "dotnetsaml\"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamarinTest", "XamarinTest\XamarinTest.csproj", "{9538AD52-D3D8-44CC-BCA3-E4DF630FFA01}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsAuthAd", "FormsAuthAd\FormsAuthAd.csproj", "{F45FF0B8-B7D2-4953-B5C6-6758C0AC1D9D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MockUp", "MockUp\MockUp.csproj", "{9997B9B8-6459-46E4-B24E-699EC93FAB99}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C42670BF-907F-4124-9ECA-1468EE3F5F51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C42670BF-907F-4124-9ECA-1468EE3F5F51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C42670BF-907F-4124-9ECA-1468EE3F5F51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C42670BF-907F-4124-9ECA-1468EE3F5F51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3FF88FC-D8C1-42EC-8FA1-5A436B37475D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3FF88FC-D8C1-42EC-8FA1-5A436B37475D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3FF88FC-D8C1-42EC-8FA1-5A436B37475D}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3FF88FC-D8C1-42EC-8FA1-5A436B37475D}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{CC15E10D-1B66-437D-A19B-BED7A2F9329D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC15E10D-1B66-437D-A19B-BED7A2F9329D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC15E10D-1B66-437D-A19B-BED7A2F9329D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC15E10D-1B66-437D-A19B-BED7A2F9329D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{431914CA-93BA-41C5-853F-EAD0F07C2E2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{431914CA-93BA-41C5-853F-EAD0F07C2E2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{431914CA-93BA-41C5-853F-EAD0F07C2E2E}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{431914CA-93BA-41C5-853F-EAD0F07C2E2E}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{9538AD52-D3D8-44CC-BCA3-E4DF630FFA01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9538AD52-D3D8-44CC-BCA3-E4DF630FFA01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9538AD52-D3D8-44CC-BCA3-E4DF630FFA01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9538AD52-D3D8-44CC-BCA3-E4DF630FFA01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F45FF0B8-B7D2-4953-B5C6-6758C0AC1D9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F45FF0B8-B7D2-4953-B5C6-6758C0AC1D9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F45FF0B8-B7D2-4953-B5C6-6758C0AC1D9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F45FF0B8-B7D2-4953-B5C6-6758C0AC1D9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9997B9B8-6459-46E4-B24E-699EC93FAB99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9997B9B8-6459-46E4-B24E-699EC93FAB99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9997B9B8-6459-46E4-B24E-699EC93FAB99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9997B9B8-6459-46E4-B24E-699EC93FAB99}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

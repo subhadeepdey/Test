@@ -1,0 +1,40 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="MockUp.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - SWOT Entry</title>
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+</head>
+<body>
+    <form runat="server" id="formAlerts">
+       <%-- <div class="navbar navbar-fixed-top">
+            <div class="container">
+                <div class="logo" style="padding-top: 5px">
+                    <a id="dnn_dnnLogo_hypLogo" title="American Water" href="https://amwater.com/">
+                        <img id="dnn_dnnLogo_imgLogo" src="https://amwater.com/Portals/18/logo-corporate.png?ver=2016-12-13-212252-153" alt="American Water">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <hr />--%>
+        <div class="container body-content" style="min-width:98%!important;">
+            <div style="vertical-align:top; float: right;width:100%" > <asp:Label Font-Bold="true" CssClass="text-primary" ID="lblFullName" runat="server"></asp:Label>
+                <asp:ImageButton AlternateText="Log out" ImageUrl="~/Image/logout-icon.png" runat="server" ID="cmdSignOut" OnClick="cmdSignOut_Click" />
+            </div>
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+      <%--  <hr />
+        <div class="container">
+            <footer>
+                <p>&copy; <%: DateTime.Now.Year %> American Water. "American Water" and the star logo are the registered trademark of American Water Works Company, Inc. All rights reserved.</p>
+            </footer>
+        </div>--%>
+    </form>
+</body>
+</html>
