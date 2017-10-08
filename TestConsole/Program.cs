@@ -24,6 +24,7 @@ namespace TestConsole
             {
                 localDateTime = DateTime.Parse(strDateTime);
                 univDateTime = localDateTime.ToUniversalTime();
+
                 Console.WriteLine("{0} This local time is {1} universal time(UTC).",
                                        localDateTime,
                                         univDateTime);

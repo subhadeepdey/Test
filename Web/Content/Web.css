@@ -1,0 +1,266 @@
+﻿/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    font-family: "Franklin Gothic Book", "Franklin Gothic", "ITC Franklin Gothic", Arial, sans-serif;
+}
+
+.user-input {
+    background-color: #006699;
+}
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set widths on the form inputs since otherwise they're 100% wide */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="tel"],
+input[type="select"] {
+    max-width: 280px;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+    .jumbotron {
+        margin-top: 20px;
+    }
+
+    .body-content {
+        padding: 0;
+    }
+}
+
+
+.header-text {
+    text-align: center;
+    font-size: medium;
+    color: #000;
+    font-family: "Franklin Gothic Demi", "Franklin Gothic", "ITC Franklin Gothic", Arial, sans-serif;
+}
+.header {
+    width: 100%;
+}
+.header-top {
+    padding: 5px 0px 5px 0px !important;
+    vertical-align: middle;
+}
+.header-bottom {
+    padding: 5px 0px 5px 0px !important;
+    vertical-align: top;
+}
+.label-text {
+    text-align: left;
+    font-weight: bold;
+    font-size: medium;
+    color: #FFFFFF;
+}
+
+.row {
+    margin-top: 5px;
+}
+
+.control {
+    width: 100% !important;
+    min-height: 25px;
+}
+
+.control-center {
+    width: 94% !important;
+}
+
+.btn {
+    background-color: #36B4D1;
+    font-weight: bold;
+    color: #FFF;
+}
+
+.report {
+    background-color: #FFF;
+    vertical-align: top;
+    padding: 0px 0px 0px 0px !important;
+}
+
+    .report > table {
+        margin-left: 5px;
+    }
+
+    .report table td {
+        text-align: center !important;
+        width: 50% !important;
+        vertical-align: top !important;
+        border: 1px solid #A8A7A6;
+    }
+
+        .report table td > table th {
+            text-align: center !important;
+            width: 50% !important;
+            color: #FFF;
+            font-weight: bold;
+            border: none !important;
+        }
+
+        .report table td > table td {
+            padding: 4px !important;
+            border: none !important;
+        }
+
+            .report table td > table td span {
+                padding-left: 5px;
+                padding-right: 5px;
+                border: 1px solid #A8A7A6;
+                text-align: center!important;
+                font-weight: bold;
+                font-size: medium;
+                color: #FFFFFF;
+                width: auto !important;
+                margin-right:1px;   
+            }
+
+            .report table td > table td div {
+                white-space: nowrap;
+                text-align:center!important;
+                /*border:1px solid red;*/
+            }
+
+            .report table td > table td ul > li {
+                text-align: left;
+            }
+
+
+    .report input[type=image] {
+        height: 20px;
+        width: 20px;
+    }
+
+
+    .report table {
+        width: 100%;
+    }
+
+
+
+.SWOTDtlHeader {
+    background-color: #808080 !important;
+    padding: 8px 0px 8px 0px;
+    border: 1px solid #A8A7A6;
+}
+
+table.report-strengths thead > tr > th {
+    background-color: #006699 !important;
+    padding: 8px 0px 8px 0px;
+}
+
+table.report-weaknesses > thead > tr > th {
+    background-color: #FFCC00 !important;
+    padding: 8px 0px 8px 0px;
+}
+
+table.report-opportunities > thead > tr > th {
+    background-color: #66CC33 !important;
+    padding: 8px 0px 8px 0px;
+}
+
+table.report-threats > thead > tr > th {
+    background-color: #CC0033 !important;
+    padding: 8px 0px 8px 0px;
+}
+
+.message {
+    padding-left:20px;
+}
+.logo {
+    height: 70px !important;
+    width: 290px  !important;
+    vertical-align: middle;
+    padding-bottom: 5px;
+}
+
+.body-image {
+    max-width: 100%;
+    max-height: 100%;
+    top: 0;
+    left: 0;
+}
+/* Dropdown Button */
+.dropbtn {
+    color: white;
+    padding: 16px;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+    color: #a8a7a6;
+    font-weight: bold;
+    background-color: #FFF;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    min-width: 160px;
+    /*box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);*/
+    z-index: 1;
+    color: #f1f1f1 !important;
+    background-color: #000;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: #f1f1f1;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+    color: #FFF;
+
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover  {
+    font-weight: bold;
+   
+}
+.dropbtn:hover { background-color: #FFF;
+    color: #808080;
+    font-weight: bold;
+
+}
+.body-text {
+    color: #a8a7a6;
+    font-family: sans-serif;
+    text-align: left;
+    margin: 10px;
+}
+.body-header {  color: #a8a7a6;
+    font-family: sans-serif;
+    text-align: left;
+    margin: 10px;
+    font-size: 15px;
+    font-weight: bold;
+}
