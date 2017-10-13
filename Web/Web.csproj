@@ -202,6 +202,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Common\Web.config" />
+    <None Include="Properties\PublishProfiles\saradama.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Image\address.png" />
     <Content Include="Image\delete.png" />
@@ -211,6 +212,7 @@
     <Content Include="Image\logout-icon.png" />
     <Content Include="Image\Ma-230x300.jpg" />
     <Content Include="Image\saradama.jpg" />
+    <Content Include="Index.html" />
     <Content Include="Login.aspx" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
