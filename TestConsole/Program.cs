@@ -10,8 +10,14 @@ namespace TestConsole
     {
         static void Main(string[] args)
         {
-            TestTime();
+            TestvirtualOverride();
+            //TestTime();
             Console.ReadLine();
+        }
+        static void TestvirtualOverride()
+        {
+            A a = new B();
+            a.printdetail();
         }
         static void TestTime()
         {
