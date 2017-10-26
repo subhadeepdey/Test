@@ -188,7 +188,9 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\style.css" />
     <Content Include="Content\Web.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -211,7 +213,9 @@
     <Content Include="Image\logo_1.png" />
     <Content Include="Image\logout-icon.png" />
     <Content Include="Image\Ma-230x300.jpg" />
+    <Content Include="Image\Ma-230x300_1.jpg" />
     <Content Include="Image\saradama.jpg" />
+    <Content Include="Image\saradama_1.jpg" />
     <Content Include="Index.html" />
     <Content Include="Login.aspx" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
@@ -220,6 +224,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />

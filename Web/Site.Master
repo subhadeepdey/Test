@@ -5,17 +5,29 @@
 <html lang="en">
 <head runat="server">
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%--<meta name="viewport" content="width=device-width, initial-scale=1.0" />--%>
     <title><%: Page.Title %> - Saradama Foundation</title>
     <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- css files -->
+    <style>
+        .content {
+            margin: 50px auto;
+            max-width: 728px;
+            line-height: 1.7;
+        }
+    </style>
 </head>
 <body>
     <div class="main-body">
         <form runat="server" id="formAlerts">
             <asp:ScriptManager ID="ScriptManager" runat="server">
                 <Scripts>
-                    <asp:ScriptReference Name="jquery" />
+                    <asp:ScriptReference Name="jquery" Path="https:/code.jquery.com/jquery-3.2.0.min.js" />
+                    <asp:ScriptReference Name="jquery" Path="~/Scripts/main.js" />
                 </Scripts>
             </asp:ScriptManager>
             <div class="header navbar-fixed-top"></div>
@@ -39,24 +51,49 @@
                     </a>
                 </div>
                 <div class="col col-md-8">
-                    <div class="dropdown">
-                        <button class="dropbtn">HOME</button>
-                    </div>
-                    <div class="dropdown">
-                        <button class="dropbtn">OUR INSPIRATION<span class="glyphicon glyphicon-chevron-down">&nbsp;</span></button>
-                        <div class="dropdown-content">
-                            <a href="#">Link 1</a>
-                            <a href="#">Link 2</a>
-                            <a href="#">Link 3</a>
+                    <!-- head   er starts -->
+                    <header>
+                        <!-- responsive nav bar -->
+                        <div class="nav-bar">
+                            <a href="#"><i class="fa fa-bars"></i><span>&#9776;</span></a>
                         </div>
-                    </div>
-                    <div class="dropdown">
-                        <button class="dropbtn">ABOUT US</button>
-                       
-                    </div>
-                    <div class="dropdown">
-                        <button class="dropbtn">CONTACT US</button>
-                    </div>
+                        <!-- navigation -->
+                        <nav>
+                            <ul>
+                                <li><a href="#"><i class="fa fa-home"></i>HOME</a></li>
+                                <li class="sub-menu">
+                                    <a href="#"><i class="fa fa-street-view"></i>OUR INSPIRATION<i class="fa fa-angle-down"></i></a>
+                                    <!-- children nav -->
+                                    <ul class="children">
+                                        <li><a href="#"><span>-</span> SUB ITEM 1</a></li>
+                                        <li><a href="#"><span>-</span> SUB ITEM 2</a></li>
+                                        <li><a href="#"><span>-</span> SUB ITEM 3</a></li>
+                                    </ul>
+                                </li>
+                                <li  class="sub-menu"><a href="#"><i class="fa fa-cog"></i>ABOUT<i class="fa fa-angle-down"></i></a>
+                                    <!-- children nav -->
+                                    <ul class="children">
+                                        <li><a href="#"><span>-</span> SUB ITEM 1</a></li>
+                                        <li><a href="#"><span>-</span> SUB ITEM 2</a></li>
+                                        <li><a href="#"><span>-</span> SUB ITEM 3</a></li>
+                                    </ul>
+                                </li>
+                                <li class="sub-menu"><a href="#"><i class="fa fa-eye-slash"></i>DONATION<i class="fa fa-angle-down"></i></a>
+                                    <ul class="children">
+                                        <li><a href="#"><span>-</span> SUB ITEM 1</a></li>
+                                        <li><a href="#"><span>-</span> SUB ITEM 2</a></li>
+                                        <li><a href="#"><span>-</span> SUB ITEM 3</a></li>
+                                    </ul>
+
+                                </li>
+                                <li><a href="#"><i class="fa fa-envelope"></i>CONTACT US</a></li>
+                            </ul>
+                        </nav>
+                        <!-- navigation end -->
+
+                    </header>
+                    <!-- header end -->
+
                 </div>
             </div>
             <hr style="width: 100%" />
@@ -65,7 +102,7 @@
                 </asp:ContentPlaceHolder>
             </div>
             <div class="panel-footer footer-content">
-                <div class="col col-md-4" style="padding-bottom: 5px" >HOME&nbsp;|&nbsp;ABOUT US&nbsp;|&nbsp;CONTACT US</div>
+                <div class="col col-md-4" style="padding-bottom: 5px">HOME&nbsp;|&nbsp;ABOUT US&nbsp;|&nbsp;CONTACT US</div>
                 <div class="col col-md-8">&nbsp;</div>
             </div>
             <%--  <hr />

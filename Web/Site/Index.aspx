@@ -5,7 +5,9 @@
     <div>
         <div class="page-container" style="min-height: 400px; width: 100%">
             <img src="../Image/saradama.jpg" alt="Saradama" class="body-image" />
-            <div class="left-center body-image-text ">SRI SARADA DEVI</div>
+            <%--<div class="left-center body-image-text ">SRI SARADA DEVI</div>--%>
+            <div class="left-center body-image-text ">Web Menu</div>
+
         </div>
         <div class="row">
             <div class="col col-md-8">
