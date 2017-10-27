@@ -252,6 +252,7 @@
     <Content Include="Scripts\_references.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Site.Mobile.Master" />
     <Content Include="Site\Index.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config">
@@ -265,7 +266,6 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Site\Web.config" />
     <Content Include="Site.Master" />
-    <Content Include="Site.Mobile.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

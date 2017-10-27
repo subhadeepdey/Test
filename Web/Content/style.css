@@ -41,7 +41,7 @@ header nav {
         cursor: pointer;
         color: #a8a7a6;
         display: block;
-        padding: 20px;
+        padding: 5px;
         text-decoration: none !important;
         font-size: 15px;
         font-family: tahoma;
@@ -93,9 +93,10 @@ header nav {
             }
 
             header nav ul li .children li a {
-                margin-left: 30px;
+                margin-left: 5px;
             }
-             header nav ul li .children li:hover a {
+
+            header nav ul li .children li:hover a {
                 color: #FFF !important;
             }
 
@@ -123,7 +124,7 @@ header nav {
         .nav-bar span {
             float: right !important;
             font-size: 17px;
-            font-weight:bold;
+            font-weight: bold;
             padding: 20px;
             color: #fff;
         }
@@ -153,6 +154,8 @@ header nav {
             display: block;
             border-bottom: 1px solid #f1f1f1;
             width: 100%;
+            text-align: left !important;
+            float: left !important;
         }
 
     header ul li a {
@@ -182,10 +185,12 @@ header nav {
     header nav ul li .children a {
         margin-left: 10px;
         padding: 5px 0;
+        float: left !important;
     }
 
     header nav ul li .fa-angle-down {
         position: relative;
         top: 3px;
+        float: left !important;
     }
 }

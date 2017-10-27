@@ -65,24 +65,24 @@
                                     <a href="#"><i class="fa fa-street-view"></i>OUR INSPIRATION<i class="fa fa-angle-down"></i></a>
                                     <!-- children nav -->
                                     <ul class="children">
-                                        <li><a href="#"><span>-</span> SUB ITEM 1</a></li>
-                                        <li><a href="#"><span>-</span> SUB ITEM 2</a></li>
-                                        <li><a href="#"><span>-</span> SUB ITEM 3</a></li>
+                                        <li><a href="#"> SUB ITEM 1</a></li>
+                                        <li><a href="#"> SUB ITEM 2</a></li>
+                                        <li><a href="#"> SUB ITEM 3</a></li>
                                     </ul>
                                 </li>
-                                <li  class="sub-menu"><a href="#"><i class="fa fa-cog"></i>ABOUT<i class="fa fa-angle-down"></i></a>
-                                    <!-- children nav -->
+                                <li class="sub-menu"><a href="#"><i class="fa fa-cog"></i>ABOUT US<i class="fa fa-angle-down"></i></a>
                                     <ul class="children">
-                                        <li><a href="#"><span>-</span> SUB ITEM 1</a></li>
-                                        <li><a href="#"><span>-</span> SUB ITEM 2</a></li>
-                                        <li><a href="#"><span>-</span> SUB ITEM 3</a></li>
+                                        <li><a href="#"> SUB ITEM 1</a></li>
+                                        <li><a href="#"> SUB ITEM 2</a></li>
+                                        <li><a href="#"> SUB ITEM 3</a></li>
                                     </ul>
+
                                 </li>
                                 <li class="sub-menu"><a href="#"><i class="fa fa-eye-slash"></i>DONATION<i class="fa fa-angle-down"></i></a>
                                     <ul class="children">
-                                        <li><a href="#"><span>-</span> SUB ITEM 1</a></li>
-                                        <li><a href="#"><span>-</span> SUB ITEM 2</a></li>
-                                        <li><a href="#"><span>-</span> SUB ITEM 3</a></li>
+                                        <li><a href="#"> SUB ITEM 1</a></li>
+                                        <li><a href="#"> SUB ITEM 2</a></li>
+                                        <li><a href="#"> SUB ITEM 3</a></li>
                                     </ul>
 
                                 </li>
