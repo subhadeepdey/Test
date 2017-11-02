@@ -3,11 +3,13 @@
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
     <div>
-        <div class="page-container" style="min-height: 400px; width: 100%">
-            <img src="../Image/saradama.jpg" alt="Saradama" class="body-image" />
-            <div class="left-center body-image-text ">SRI SARADA DEVI</div>
-            <%--<div class="left-center body-image-text ">Web Menu</div>--%>
+        <div class="page-container">
+            <div class="body-image">&nbsp;
+                <div class="left-center body-image-text">SRI SARADA DEVI</div>
+            </div>
+            <%--<img src="../Image/saradama.jpg" alt="Saradama" class="body-image" />--%>
 
+            <%--<div class="left-center body-image-text ">Web Menu</div>--%>
         </div>
         <div class="row">
             <div class="col col-md-8">
@@ -21,7 +23,7 @@
                 </div>
             </div>
             <div class="col col-md-4">
-                <img src="../Image/Ma-230x300.jpg" alt="Saradama" class="body-image" />
+                <img src="../Image/Ma-230x300.jpg" alt="Saradama" class="body-image-sm" />
             </div>
         </div>
 

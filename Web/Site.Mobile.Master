@@ -2,22 +2,119 @@
 <%@ Register Src="~/ViewSwitcher.ascx" TagPrefix="friendlyUrls" TagName="ViewSwitcher" %>
 
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+
+<html lang="en">
 <head runat="server">
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-    <asp:ContentPlaceHolder runat="server" ID="HeadContent" />
+    <meta charset="utf-8" />
+    <%--<meta name="viewport" content="width=device-width, initial-scale=1.0" />--%>
+    <title><%: Page.Title %>  Saradama Foundation</title>
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- css files -->
+    <style>
+        .content {
+            margin: 50px auto;
+            max-width: 728px;
+            line-height: 1.7;
+        }
+    </style>
 </head>
 <body>
-    <form id="form1" runat="server">
-    <div>
-        <h1>Mobile Master Page</h1>
-        <asp:ContentPlaceHolder runat="server" ID="FeaturedContent" />
-        <section class="content-wrapper main-content clear-fix">
-            <asp:ContentPlaceHolder runat="server" ID="MainContent" />
-        </section>
-        <friendlyUrls:ViewSwitcher runat="server" />
+    <div class="main-body">
+        <form runat="server" id="formAlerts">
+            <asp:ScriptManager ID="ScriptManager" runat="server">
+                <Scripts>
+                    <asp:ScriptReference Name="jquery" Path="https:/code.jquery.com/jquery-3.2.0.min.js" />
+                    <asp:ScriptReference Name="jquery" Path="~/Scripts/main.js" />
+                </Scripts>
+            </asp:ScriptManager>
+           
+
+            <div class="header-bottom" style="height: 100%">
+                <div style="width: 100%!important;">
+                    <!-- head   er starts -->
+                    <header>
+                        <div class="header-top">
+                            <div class="col col-md-4">
+                                <img src="../Image/address.png" alt="Address" class="address-icon" />
+                                <span class="header-text">Saradama Foundation, New Delhi, India</span>
+                            </div>
+                            <div class="col col-md-4"><span class="glyphicon glyphicon-envelope header-text">info@saradama.org</span></div>
+                            <div class="col col-md-4">
+                                <asp:ImageButton AlternateText="Log out" ImageUrl="~/Image/logout-icon.png" runat="server" ID="cmdSignOut" OnClick="cmdSignOut_Click" />
+                                <asp:Label Font-Bold="true" CssClass="text-primary" ID="lblFullName" runat="server"></asp:Label>
+                            </div>
+                        </div>
+                        <hr style="width: 100%" />
+                         <div class="nav-bar">
+                            <a href="#"><i class="fa fa-bars"></i><%--<span>&#9776;</span>--%></a>
+                        </div>
+                        <div class="col col-md-4">
+                            <a id="dnn_dnnLogo_hypLogo" title="Saradama Foundation" href="#">
+                                <img class="logo" id="dnn_dnnLogo_imgLogo" src="../Image/logo.png" alt="">
+                            </a>
+                        </div>
+                        <!-- responsive nav bar -->
+                       
+                        <div class="col col-md-8">  <!-- navigation -->
+                        <nav>
+                            <ul>
+                                <li><a href="#"><i class="fa fa-home"></i>HOME</a></li>
+                                <li class="sub-menu">
+                                    <a href="#"><i class="fa fa-street-view"></i>OUR INSPIRATION<i class="fa fa-angle-down"></i></a>
+                                    <!-- children nav -->
+                                    <ul class="children">
+                                        <li><a href="#">SUB ITEM 1</a></li>
+                                        <li><a href="#">SUB ITEM 2</a></li>
+                                        <li><a href="#">SUB ITEM 3</a></li>
+                                    </ul>
+                                </li>
+                                <li class="sub-menu"><a href="#"><i class="fa fa-cog"></i>ABOUT US<i class="fa fa-angle-down"></i></a>
+                                    <ul class="children">
+                                        <li><a href="#">SUB ITEM 1</a></li>
+                                        <li><a href="#">SUB ITEM 2</a></li>
+                                        <li><a href="#">SUB ITEM 3</a></li>
+                                    </ul>
+
+                                </li>
+                                <li class="sub-menu"><a href="#"><i class="fa fa-eye-slash"></i>DONATION<i class="fa fa-angle-down"></i></a>
+                                    <ul class="children">
+                                        <li><a href="#">SUB ITEM 1</a></li>
+                                        <li><a href="#">SUB ITEM 2</a></li>
+                                        <li><a href="#">SUB ITEM 3</a></li>
+                                    </ul>
+
+                                </li>
+                                <li><a href="#"><i class="fa fa-envelope"></i>CONTACT US</a></li>
+                            </ul>
+                        </nav>
+                        <!-- navigation end --></div>
+                      
+
+                    </header>
+                    <!-- header end -->
+
+                </div>
+            </div>
+            <hr style="width: 100%" />
+            <div>
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+            <div class="panel-footer footer-content">
+                <div class="col col-md-4" style="padding-bottom: 5px">HOME&nbsp;|&nbsp;ABOUT US&nbsp;|&nbsp;CONTACT US</div>
+                <div class="col col-md-8">&nbsp;</div>
+            </div>
+            <%--  <hr />
+        <div class="container">
+            <footer>
+                <p>&copy; <%: DateTime.Now.Year %> American Water. "American Water" and the star logo are the registered trademark of American Water Works Company, Inc. All rights reserved.</p>
+            </footer>
+        </div>--%>
+        </form>
     </div>
-    </form>
 </body>
 </html>

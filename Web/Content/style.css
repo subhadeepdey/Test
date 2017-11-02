@@ -115,29 +115,28 @@ header nav {
 
     .nav-bar {
         display: block;
-        width: 100%;
+        /*width: 100%!important;*/
         position: fixed;
         top: 0;
-        background: #000;
     }
 
         .nav-bar span {
             float: right !important;
-            font-size: 17px;
+            font-size: 20px;
             font-weight: bold;
             padding: 20px;
-            color: #fff;
+            color: #a8a7a6;
         }
 
         .nav-bar .fa-bars {
             display: block;
             padding: 20px;
-            color: #fff;
             overflow: hidden;
-            font-size: 15px;
+            font-size: 20px;
             font-weight: bold;
             text-decoration: none;
             float: right;
+            color: #a8a7a6;
         }
 
     header nav {
