@@ -116,12 +116,12 @@ header nav {
     .nav-bar {
         display: block;
         /*width: 100%!important;*/
-        position: fixed;
+        /*position: fixed;*/
         top: 0;
     }
 
         .nav-bar span {
-            float: right !important;
+            float: left !important;
             font-size: 20px;
             font-weight: bold;
             padding: 20px;
@@ -130,12 +130,13 @@ header nav {
 
         .nav-bar .fa-bars {
             display: block;
-            padding: 20px;
+            padding-right: 20px;
+            padding-top: 5px;
             overflow: hidden;
             font-size: 20px;
             font-weight: bold;
             text-decoration: none;
-            float: right;
+            float: left;
             color: #a8a7a6;
         }
 
