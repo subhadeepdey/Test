@@ -27,8 +27,6 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "TestWeb", "TestWeb\", "{D3F
 		DefaultWebSiteLanguage = "Visual C#"
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamarinTest", "XamarinTest\XamarinTest.csproj", "{9538AD52-D3D8-44CC-BCA3-E4DF630FFA01}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsAuthAd", "FormsAuthAd\FormsAuthAd.csproj", "{F45FF0B8-B7D2-4953-B5C6-6758C0AC1D9D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.Common", "Web.Common\Web.Common.csproj", "{833C70FB-6554-4DF4-AE0F-5053B9B15EA5}"
@@ -47,10 +45,6 @@ Global
 		{D3FF88FC-D8C1-42EC-8FA1-5A436B37475D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3FF88FC-D8C1-42EC-8FA1-5A436B37475D}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{D3FF88FC-D8C1-42EC-8FA1-5A436B37475D}.Release|Any CPU.Build.0 = Debug|Any CPU
-		{9538AD52-D3D8-44CC-BCA3-E4DF630FFA01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9538AD52-D3D8-44CC-BCA3-E4DF630FFA01}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9538AD52-D3D8-44CC-BCA3-E4DF630FFA01}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9538AD52-D3D8-44CC-BCA3-E4DF630FFA01}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F45FF0B8-B7D2-4953-B5C6-6758C0AC1D9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F45FF0B8-B7D2-4953-B5C6-6758C0AC1D9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F45FF0B8-B7D2-4953-B5C6-6758C0AC1D9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
