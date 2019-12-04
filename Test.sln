@@ -31,6 +31,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsAuthAd", "FormsAuthAd\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.Common", "Web.Common\Web.Common.csproj", "{833C70FB-6554-4DF4-AE0F-5053B9B15EA5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FDDWeb", "FDDWeb\FDDWeb.csproj", "{3C716DB6-4E6E-485B-8C65-4BEA5FFBBB71}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FDDWeb.Tests", "FDDWeb.Tests\FDDWeb.Tests.csproj", "{706B135B-1354-43BD-B42E-BDD11A9623A1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +57,14 @@ Global
 		{833C70FB-6554-4DF4-AE0F-5053B9B15EA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{833C70FB-6554-4DF4-AE0F-5053B9B15EA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{833C70FB-6554-4DF4-AE0F-5053B9B15EA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C716DB6-4E6E-485B-8C65-4BEA5FFBBB71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C716DB6-4E6E-485B-8C65-4BEA5FFBBB71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C716DB6-4E6E-485B-8C65-4BEA5FFBBB71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C716DB6-4E6E-485B-8C65-4BEA5FFBBB71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{706B135B-1354-43BD-B42E-BDD11A9623A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{706B135B-1354-43BD-B42E-BDD11A9623A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{706B135B-1354-43BD-B42E-BDD11A9623A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{706B135B-1354-43BD-B42E-BDD11A9623A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
