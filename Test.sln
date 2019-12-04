@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsole", "TestConsole\TestConsole.csproj", "{C42670BF-907F-4124-9ECA-1468EE3F5F51}"
 EndProject
@@ -27,36 +27,9 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "TestWeb", "TestWeb\", "{D3F
 		DefaultWebSiteLanguage = "Visual C#"
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWebApplication", "TestWebApplication\TestWebApplication.csproj", "{CC15E10D-1B66-437D-A19B-BED7A2F9329D}"
-EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "dotnetsaml", "http://localhost/dotnetsaml", "{431914CA-93BA-41C5-853F-EAD0F07C2E2E}"
-	ProjectSection(WebsiteProperties) = preProject
-		UseIISExpress = "false"
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5.2"
-		Debug.AspNetCompiler.VirtualPath = "/dotnetsaml"
-		Debug.AspNetCompiler.PhysicalPath = "dotnetsaml\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\dotnetsaml\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/dotnetsaml"
-		Release.AspNetCompiler.PhysicalPath = "dotnetsaml\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\dotnetsaml\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		SlnRelativePath = "dotnetsaml\"
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamarinTest", "XamarinTest\XamarinTest.csproj", "{9538AD52-D3D8-44CC-BCA3-E4DF630FFA01}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsAuthAd", "FormsAuthAd\FormsAuthAd.csproj", "{F45FF0B8-B7D2-4953-B5C6-6758C0AC1D9D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MockUp", "MockUp\MockUp.csproj", "{9997B9B8-6459-46E4-B24E-699EC93FAB99}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{6901F3B4-404F-487A-A8D5-2FA3AFFC5054}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.Common", "Web.Common\Web.Common.csproj", "{833C70FB-6554-4DF4-AE0F-5053B9B15EA5}"
 EndProject
@@ -74,14 +47,6 @@ Global
 		{D3FF88FC-D8C1-42EC-8FA1-5A436B37475D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3FF88FC-D8C1-42EC-8FA1-5A436B37475D}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{D3FF88FC-D8C1-42EC-8FA1-5A436B37475D}.Release|Any CPU.Build.0 = Debug|Any CPU
-		{CC15E10D-1B66-437D-A19B-BED7A2F9329D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CC15E10D-1B66-437D-A19B-BED7A2F9329D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CC15E10D-1B66-437D-A19B-BED7A2F9329D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CC15E10D-1B66-437D-A19B-BED7A2F9329D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{431914CA-93BA-41C5-853F-EAD0F07C2E2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{431914CA-93BA-41C5-853F-EAD0F07C2E2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{431914CA-93BA-41C5-853F-EAD0F07C2E2E}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{431914CA-93BA-41C5-853F-EAD0F07C2E2E}.Release|Any CPU.Build.0 = Debug|Any CPU
 		{9538AD52-D3D8-44CC-BCA3-E4DF630FFA01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9538AD52-D3D8-44CC-BCA3-E4DF630FFA01}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9538AD52-D3D8-44CC-BCA3-E4DF630FFA01}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -90,14 +55,6 @@ Global
 		{F45FF0B8-B7D2-4953-B5C6-6758C0AC1D9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F45FF0B8-B7D2-4953-B5C6-6758C0AC1D9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F45FF0B8-B7D2-4953-B5C6-6758C0AC1D9D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9997B9B8-6459-46E4-B24E-699EC93FAB99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9997B9B8-6459-46E4-B24E-699EC93FAB99}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9997B9B8-6459-46E4-B24E-699EC93FAB99}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9997B9B8-6459-46E4-B24E-699EC93FAB99}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6901F3B4-404F-487A-A8D5-2FA3AFFC5054}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6901F3B4-404F-487A-A8D5-2FA3AFFC5054}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6901F3B4-404F-487A-A8D5-2FA3AFFC5054}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6901F3B4-404F-487A-A8D5-2FA3AFFC5054}.Release|Any CPU.Build.0 = Release|Any CPU
 		{833C70FB-6554-4DF4-AE0F-5053B9B15EA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{833C70FB-6554-4DF4-AE0F-5053B9B15EA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{833C70FB-6554-4DF4-AE0F-5053B9B15EA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -108,5 +65,6 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.ExceptionHandling.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Logging.6.0.1304.0\lib\NET45
+		SolutionGuid = {5F108AAA-DDA8-42BC-8607-00BB2DC16586}
 	EndGlobalSection
 EndGlobal
