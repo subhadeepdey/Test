@@ -6,16 +6,23 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Owin;
 using FDDWeb.Models;
+using FDDWeb.BLL;
+using Microsoft.Practices.Unity;
 
 namespace FDDWeb.Account
 {
     public partial class Register : Page
     {
+        [Dependency]
+        public IUserLogic userLogic { get; set; }
+
         protected void CreateUser_Click(object sender, EventArgs e)
         {
             var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
             var signInManager = Context.GetOwinContext().Get<ApplicationSignInManager>();
             var user = new ApplicationUser() { UserName = Email.Text, Email = Email.Text };
+            var aa = userLogic.Register(user);
+
             IdentityResult result = manager.Create(user, Password.Text);
             if (result.Succeeded)
             {
