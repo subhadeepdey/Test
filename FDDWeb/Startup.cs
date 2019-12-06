@@ -23,25 +23,29 @@ namespace FDDWeb
             //ConfigureAuth(app);
 
             container = HttpContext.Current.Application.GetContainer();
-            var userLogic = container.Resolve<IUserLogic>();
-            app.UseCookieAuthentication(new CookieAuthenticationOptions
-            {
-                AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                LoginPath = new PathString("/Account/Login"),
-                Provider = new CookieAuthenticationProvider
-                {
-                    //OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, ApplicationUser>(
-                    //   validateInterval: TimeSpan.FromMinutes(30),
-                    //   regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
-                }
-            });
+            // var userLogic = container.Resolve<IUserLogic>();
+            //app.UseCookieAuthentication(new CookieAuthenticationOptions
+            //{
+            //    AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
+            //    LoginPath = new PathString("/Account/Login"),
+            //    Provider = new CookieAuthenticationProvider
+            //    {
+            //        //OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, ApplicationUser>(
+            //        //   validateInterval: TimeSpan.FromMinutes(30),
+            //        //   regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
+            //    }
+            //});
 
-            app.FDDAuthentication(userLogic);
+            //app.FDDAuthentication(userLogic);
             app.Use((context, next) => AddFDDAuthorizations(next, context));
         }
 
         protected async Task AddFDDAuthorizations(Func<Task> next, IOwinContext context)
         {
+
+            container = HttpContext.Current.Application.GetContainer();
+      //      var userLogic = container.Resolve<IUserLogic>();
+
             // If there is a user associated with the request...
             if (context?.Authentication?.User != null)
             {
@@ -59,7 +63,7 @@ namespace FDDWeb
             }
 
             // Continue the OWIN pipeline.
-            next.Invoke();
+            await next.Invoke();
         }
     }
 }

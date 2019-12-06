@@ -1,5 +1,6 @@
 ﻿using FDDWeb.DAO;
 using FDDWeb.Models;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace FDDWeb.BLL
     public interface IUserLogic
     {
         bool Register(ApplicationUser user);
+        LoginStatus IsValidUser(string username, string password);
     }
     public class UserLogic : IUserLogic
     {
@@ -21,5 +23,10 @@ namespace FDDWeb.BLL
         }
 
         public bool Register(ApplicationUser user) => userDao.Register(user);
+
+        public LoginStatus IsValidUser(string username, string password)
+        {
+            return userDao.IsValidUser(username, password);
+        }
     }
 }
