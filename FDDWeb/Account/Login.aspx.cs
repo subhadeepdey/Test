@@ -7,6 +7,7 @@ using Owin;
 using FDDWeb.Models;
 using FDDWeb.BLL;
 using Microsoft.Practices.Unity;
+using System.Web.Security;
 
 namespace FDDWeb.Account
 {
@@ -41,10 +42,22 @@ namespace FDDWeb.Account
                 //// To enable password failures to trigger lockout, change to shouldLockout: true
                 // var result = signinManager.PasswordSignIn(Email.Text, Password.Text, RememberMe.Checked, shouldLockout: false);
                 SignInStatus result = SignInStatus.Success;
-                var status = userLogic.IsValidUser(Email.Text, Password.Text);
+                var status = userLogic.IsValidUser(Username.Text, Password.Text);
                 switch (status)
                 {
                     case LoginStatus.Success:
+                        var roles = "User";
+                        FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, Username.Text, DateTime.Now,
+                            DateTime.Now.AddMinutes(2880), RememberMe.Checked, roles, FormsAuthentication.FormsCookiePath);
+                        string hash = FormsAuthentication.Encrypt(ticket);
+                        HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, hash);
+
+                        if (ticket.IsPersistent)
+                        {
+                            cookie.Expires = ticket.Expiration;
+                        }
+                        Response.Cookies.Add(cookie);
+                        Response.Redirect(FormsAuthentication.GetRedirectUrl(Username.Text, RememberMe.Checked));
                         IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
                         break;
                     case LoginStatus.InActive:
