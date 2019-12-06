@@ -35,6 +35,27 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FDDWeb", "FDDWeb\FDDWeb.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FDDWeb.Tests", "FDDWeb.Tests\FDDWeb.Tests.csproj", "{706B135B-1354-43BD-B42E-BDD11A9623A1}"
 EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "User_Roles_CS", "User_Roles_CS\", "{0656CCA0-6E11-4D04-9792-2B46A2F36D58}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_51840"
+		Debug.AspNetCompiler.PhysicalPath = "User_Roles_CS\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_51840\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_51840"
+		Release.AspNetCompiler.PhysicalPath = "User_Roles_CS\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_51840\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "51840"
+		SlnRelativePath = "User_Roles_CS\"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,12 +86,16 @@ Global
 		{706B135B-1354-43BD-B42E-BDD11A9623A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{706B135B-1354-43BD-B42E-BDD11A9623A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{706B135B-1354-43BD-B42E-BDD11A9623A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0656CCA0-6E11-4D04-9792-2B46A2F36D58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0656CCA0-6E11-4D04-9792-2B46A2F36D58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0656CCA0-6E11-4D04-9792-2B46A2F36D58}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{0656CCA0-6E11-4D04-9792-2B46A2F36D58}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {5F108AAA-DDA8-42BC-8607-00BB2DC16586}
 		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.ExceptionHandling.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Logging.6.0.1304.0\lib\NET45
+		SolutionGuid = {5F108AAA-DDA8-42BC-8607-00BB2DC16586}
 	EndGlobalSection
 EndGlobal

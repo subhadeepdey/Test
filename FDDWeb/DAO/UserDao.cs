@@ -19,7 +19,6 @@ namespace FDDWeb.DAO
     {
         public LoginStatus IsValidUser(string username, string password)
         {
-            LoginStatus status;
             int userId = 0;
             string roles = string.Empty;
             string constr = ConfigurationManager.ConnectionStrings["FDDConnection"].ConnectionString;
