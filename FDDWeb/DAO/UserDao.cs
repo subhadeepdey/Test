@@ -1,11 +1,8 @@
 ﻿using FDDWeb.Models;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
 
 namespace FDDWeb.DAO
 {
@@ -19,7 +16,8 @@ namespace FDDWeb.DAO
     {
         public LoginStatus IsValidUser(string username, string password)
         {
-            int userId = 0;
+            Guid userId;
+            int status = 0;
             string roles = string.Empty;
             string constr = ConfigurationManager.ConnectionStrings["FDDConnection"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
@@ -33,16 +31,15 @@ namespace FDDWeb.DAO
                     con.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
                     reader.Read();
-                    userId = Convert.ToInt32(reader["UserId"]);
-                    roles = reader["Roles"].ToString();
+                    userId = new Guid(Convert.ToString(reader["ID"]));
+                    status = Convert.ToInt32(reader["STATUS"]);
+                    roles = reader["ROLE"].ToString();
                     con.Close();
                 }
-                switch (userId)
+                switch (status)
                 {
                     case -1:
                         return LoginStatus.Failure;
-                    case -2:
-                        return LoginStatus.InActive;
                     default:
                         return LoginStatus.Success;
                 }
@@ -51,7 +48,32 @@ namespace FDDWeb.DAO
 
         public bool Register(ApplicationUser user)
         {
-            return true;
+            Guid userId;
+            string role = string.Empty;
+            var status = LoginStatus.Failure;
+            string constr = ConfigurationManager.ConnectionStrings["FDDConnection"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand("INSERT_USER"))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Username", user.UserName);
+                    cmd.Parameters.AddWithValue("@Password", user.PasswordHash);
+                    cmd.Parameters.AddWithValue("@Email", user.Email);
+                    cmd.Parameters.AddWithValue("@Phone", user.Phone);
+                    cmd.Parameters.AddWithValue("@Address", user.Address);
+                    cmd.Parameters.AddWithValue("@AlternateAddress", user.AlternateAddress);
+                    cmd.Connection = con;
+                    con.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    reader.Read();
+                    userId = new Guid(Convert.ToString(reader["USER_ID"]));
+                    role = Convert.ToString(reader["ROLE"].ToString());
+                    status = (LoginStatus)Convert.ToInt32(reader["STATUS"]);
+                    con.Close();
+                }
+                return status == LoginStatus.Success;
+            }
         }
     }
 }

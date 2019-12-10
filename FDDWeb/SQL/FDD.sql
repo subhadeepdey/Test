@@ -1,144 +1,45 @@
-USE [master]
-GO
-
-CREATE DATABASE [FDD]
-
-GO
 
 USE [FDD]
 GO
 
-/****** Object:  Table [dbo].[Users] ******/
-SET ANSI_NULLS ON
+DROP TABLE [ORDER]
 GO
 
-SET QUOTED_IDENTIFIER ON
+DROP TABLE [MENU]
 GO
 
-CREATE TABLE [dbo].[Users](
-	[UserId] [int] IDENTITY(1,1) NOT NULL,
-	[Username] [nvarchar](20) NOT NULL,
-	[Password] [nvarchar](20) NOT NULL,
-	[Email] [nvarchar](30) NOT NULL,
-	[Phone] [nvarchar](30) NOT NULL,
-	[Address] [nvarchar](500) NOT NULL,
-	[Address2] [nvarchar](500)  NULL,
-	[CreatedDate] [datetime] NOT NULL,
-	[LastLoginDate] [datetime] NULL,
- CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED 
-(
-	[UserId] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
-
+DROP TABLE [FOOD_CATEGORY]
 GO
 
-USE [FDD]
+DROP TABLE [ORDER_STATUS]
 GO
 
-/****** Object:  StoredProcedure [dbo].[Insert_User]    ******/
-SET ANSI_NULLS ON
+DROP TABLE [USER]
 GO
 
-SET QUOTED_IDENTIFIER ON
+DROP TABLE [ROLE]
 GO
 
---Insert_User 'Test2', '12345', 'Test@testweb.com', '800-111-1234', 'Test Address 1', 'Test Address 2'
-CREATE or ALTER PROCEDURE [dbo].[Insert_User]
-	@Username NVARCHAR(20),
-	@Password NVARCHAR(20),
-	@Email NVARCHAR(30),
-	@Phone NVARCHAR(30),
-	@Address NVARCHAR(500),
-	@Address2 NVARCHAR(500)
-AS
-BEGIN
-	SET NOCOUNT ON;
-	IF EXISTS(SELECT UserId FROM Users WHERE Username = @Username)
-	BEGIN
-		SELECT -1 -- Username exists.
-	END
-	ELSE IF EXISTS(SELECT UserId FROM Users WHERE Email = @Email)
-	BEGIN
-		SELECT -2 -- Email exists.
-	END
-	ELSE
-	BEGIN
-		INSERT INTO [Users]
-			   ([Username]
-			   ,[Password]
-			   ,[Email]
-			   ,[Phone]
-			   ,[Address]
-			   ,[Address2]
-			   ,[CreatedDate])
-		VALUES
-			   (@Username
-			   ,@Password
-			   ,@Email
-			   ,@Phone
-			   ,@Address
-			   ,@Address2
-			   ,GETDATE())
-		
-		SELECT SCOPE_IDENTITY() -- UserId			   
-     END
-END
-
+DROP PROCEDURE [CREATE_MENU]
+GO
+DROP PROCEDURE [CREATE_ORDER]
+GO
+DROP PROCEDURE [GET_MENU]
+GO
+DROP PROCEDURE [GET_ORDER_ON_STATUS]
+GO
+DROP PROCEDURE [GET_USER_ORDER]
+GO
+DROP PROCEDURE [INSERT_USER]
+GO
+DROP PROCEDURE [REMOVE_MENU]
+GO
+DROP PROCEDURE [UPDATE_ORDER]
+GO
+DROP PROCEDURE [VALIDATE_USER]
 GO
 
-/****** Object:  Table [dbo].[UserActivation]  ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-CREATE TABLE [dbo].[UserActivation](
-	[UserId] [int] NOT NULL,
-	[ActivationCode] [uniqueidentifier] NOT NULL,
- CONSTRAINT [PK_UserActivation] PRIMARY KEY CLUSTERED 
-(
-	[UserId] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
-
-GO
-CREATE  PROCEDURE [dbo].[Validate_User]
-	@Username NVARCHAR(20),
-	@Password NVARCHAR(20)
-AS
-BEGIN
-	SET NOCOUNT ON;
-	DECLARE @UserId INT, @LastLoginDate DATETIME
-	
-	SELECT @UserId = UserId, @LastLoginDate = LastLoginDate 
-	FROM Users WHERE Username = @Username AND [Password] = @Password
-	
-	IF @UserId IS NOT NULL
-	BEGIN
-		IF NOT EXISTS(SELECT UserId FROM UserActivation WHERE UserId = @UserId)
-		BEGIN
-			UPDATE Users
-			SET LastLoginDate =  GETDATE()
-			WHERE UserId = @UserId
-			SELECT @UserId [UserId] -- User Valid
-		END
-		ELSE
-		BEGIN
-			SELECT -2 -- User not activated.
-		END
-	END
-	ELSE
-	BEGIN
-		SELECT -1 -- User invalid.
-	END
-END
-GO
-USE [FDD]
-GO
-
-/****** Object:  Table [dbo].[Roles]  ******/
+/****** Object:  Table [ROLE]    Script Date: 12/6/2019 4:53:18 PM******/
 SET ANSI_NULLS ON
 GO
 
@@ -148,12 +49,12 @@ GO
 SET ANSI_PADDING ON
 GO
 
-CREATE TABLE [dbo].[Roles](
-	[RoleId] [int] NOT NULL,
-	[RoleName] [varchar](20) NOT NULL,
- CONSTRAINT [PK_Roles] PRIMARY KEY CLUSTERED 
+CREATE TABLE [ROLE](
+	[ID] [UNIQUEIDENTIFIER] NOT NULL DEFAULT NEWID(),
+	[ROLE] [VARCHAR](20) NOT NULL,
+ CONSTRAINT [PK_ROLE] PRIMARY KEY CLUSTERED 
 (
-	[RoleId] ASC
+	[ID] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
@@ -162,61 +63,373 @@ GO
 SET ANSI_PADDING OFF
 GO
 
+INSERT INTO [ROLE]([ROLE]) VALUES ('Administrator'), ('User')
+SELECT * FROM [ROLE]
 
-ALTER TABLE Users
-ADD RoleId INT
-GO
-
-ALTER TABLE Users
-ADD CONSTRAINT FK_Users_Roles
-FOREIGN KEY (RoleId) REFERENCES Roles(RoleId)
-
-GO
-INSERT INTO Roles
-SELECT 1, 'Administrator'
-UNION ALL
-SELECT 2, 'User'
-GO
-TRUNCATE TABLE Users
-GO
-INSERT INTO Users
-SELECT 'Admin', '12345', 'Test@testweb.com', '800-111-1234', 'Test Address 1', 'Test Address 2', GETDATE(), NULL, 1
-UNION ALL
-SELECT 'Test', '12345', 'Test@testweb.com', '800-111-1234', 'Test Address 1', 'Test Address 2', GETDATE(), NULL, 2
+/****** Object:  Table [USER]    Script Date: 01/03/2014 16:36:00 ******/
+SET ANSI_NULLS ON
 GO
 
---[Validate_User] 'Test', '12345'
-ALTER  PROCEDURE [dbo].[Validate_User]
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [USER](
+	[ID] [UNIQUEIDENTIFIER] NOT NULL DEFAULT NEWID(),
+	[USERNAME] [NVARCHAR](100) NOT NULL,
+	[NAME] [NVARCHAR](100) NOT NULL,
+	[PASSWORD] [NVARCHAR](100) NOT NULL,
+	[EMAIL] [NVARCHAR](100) NOT NULL,
+	[PHONE] [NVARCHAR](50) NOT NULL,
+	[ADDRESS] [NVARCHAR](500) NOT NULL,
+	[ALTERNATE_ADDRESS] [NVARCHAR](500) NULL,
+	[ROLE_ID] [UNIQUEIDENTIFIER] FOREIGN KEY REFERENCES [ROLE](ID),
+	[CREATEDDATE] [DATETIME] DEFAULT GETDATE(),
+	[LASTLOGINDATE] [DATETIME] NULL,
+ CONSTRAINT [PK_USER] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+/****** Object:  StoredProcedure [Insert_User]    Script Date: 01/03/2014 16:36:23 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- INSERT_USER 'Test', '12345', 'test@FDD.com', '888-888-8881','Test Address 1',' Alternate Test Address 1'
+-- INSERT_USER 'Admin', '12345', 'admin@FDD.com', '888-888-8882','Test Address 2',' Alternate Test Address 2'
+-- SELECT * FROM [USER]
+
+CREATE PROCEDURE [INSERT_USER]
+	@Username NVARCHAR(100),
+	@Password NVARCHAR(100),
+	@Name NVARCHAR(100),
+	@Email NVARCHAR(100),
+	@Phone NVARCHAR(50),
+	@Address NVARCHAR(500),
+	@AlternateAddress NVARCHAR(500),
+	@Role VARCHAR(50)
+AS
+BEGIN
+	SET NOCOUNT ON;
+	IF EXISTS(SELECT ID FROM [USER] WHERE USERNAME = @Username)
+	BEGIN
+		SELECT -1 -- Username exists.
+	END
+	ELSE
+	BEGIN
+		INSERT INTO [USER]
+			   ([USERNAME]
+			   ,[PASSWORD]
+			   ,[NAME]
+			   ,[EMAIL]
+			   ,[PHONE]
+			   ,[ADDRESS]
+			   ,[ALTERNATE_ADDRESS]
+			   ,[ROLE_ID]
+			   )
+		(SELECT
+			   @Username
+			   ,@Password
+			   ,@Name
+			   ,@Email
+			   ,@Address
+			   ,@Email
+			   ,@AlternateAddress
+			   , r.[ID]
+			   FROM [ROLE] r WHERE
+			   r.[ROLE] = @Role)
+		
+		SELECT [USER].[ID], [ROLE], 0 AS [STATUS] 
+			FROM [USER] 
+			LEFT JOIN [ROLE]
+			ON [USER].[ROLE_ID] = [ROLE].[ID]
+			WHERE [USERNAME] = @Username
+     END
+END
+
+GO
+
+GO
+--[VALIDATE_USER] 'Test', '12345'
+CREATE PROCEDURE [VALIDATE_USER]
 	@Username NVARCHAR(20),
 	@Password NVARCHAR(20)
 AS
 BEGIN
 	SET NOCOUNT ON;
-	DECLARE @UserId INT, @LastLoginDate DATETIME, @RoleId INT
+	DECLARE @ID [UNIQUEIDENTIFIER], @LastLoginDate DATETIME
 	
-	SELECT @UserId = UserId, @LastLoginDate = LastLoginDate, @RoleId = RoleId 
-	FROM Users WHERE Username = @Username AND [Password] = @Password
+	SELECT @ID = ID, @LastLoginDate = LastLoginDate 
+	FROM [USER] WHERE USERNAME = @Username AND [PASSWORD] = @Password
 	
-	IF @UserId IS NOT NULL
+	IF @ID IS NOT NULL
 	BEGIN
-		IF NOT EXISTS(SELECT UserId FROM UserActivation WHERE UserId = @UserId)
-		BEGIN
-			UPDATE Users
+		UPDATE [USER]
 			SET LastLoginDate =  GETDATE()
-			WHERE UserId = @UserId
-			
-			SELECT @UserId [UserId], 
-					(SELECT RoleName FROM Roles 
-					 WHERE RoleId = @RoleId) [Roles] -- User Valid
-		END
-		ELSE
-		BEGIN
-			SELECT -2 -- User not activated.
-		END
+			WHERE ID = @ID
+		
+		-- User Valid
+		SELECT [USER].[ID], 
+			0 AS [STATUS], 
+			[ROLE] 
+			FROM [USER] 
+			LEFT JOIN [ROLE]
+			ON [USER].[ROLE_ID] = [ROLE].[ID]
+			WHERE [USER].[ID] = @ID
 	END
 	ELSE
 	BEGIN
-		SELECT -1 -- User invalid.
+		SELECT 
+		 NULL AS [ID], 
+		-1 AS [STATUS],
+		NULL AS [ROLE]-- User invalid.
 	END
 END
+GO
 
+
+/****** Object:  Table [FOOD_CATEGORY]    Script Date: 12/6/2019 4:53:18 PM ******/
+CREATE TABLE [FOOD_CATEGORY](
+	[ID] [UNIQUEIDENTIFIER] NOT NULL DEFAULT NEWID(),
+	[CATEGORY] [VARCHAR](50) NOT NULL,
+ CONSTRAINT [PK_FOOD_CATEGORY] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 85) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+INSERT INTO [FOOD_CATEGORY] ([CATEGORY]) VALUES('APPETIZERS'),('MAIN COURSES'), ('DESSERTS'), ('DRINKS'), ('KIDS MENU')
+SELECT * FROM [FOOD_CATEGORY]
+/****** Object:  Table [MENU]    Script Date: 12/6/2019 4:53:18 PM ******/
+
+CREATE TABLE [MENU](
+	[ID] [UNIQUEIDENTIFIER] NOT NULL DEFAULT NEWID(),
+	[NAME] [VARCHAR](50) NOT NULL,
+	[PRICE] [DECIMAL] NOT NULL,
+	[DESCRIPTION] [VARCHAR](200) NOT NULL,
+	[IS_DELETED] [BIT] NOT NULL DEFAULT 0,
+	FOOD_CATEGORY_ID [UNIQUEIDENTIFIER] FOREIGN KEY REFERENCES [FOOD_CATEGORY](ID)
+
+ CONSTRAINT [PK_MENU] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 85) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+/****** Object:  Table [ORDER_STATUS]    Script Date: 12/6/2019 4:53:18 PM ******/
+CREATE TABLE [ORDER_STATUS](
+	[ID] [UNIQUEIDENTIFIER] NOT NULL DEFAULT NEWID(),
+	[STATUS] [VARCHAR](50) NOT NULL,
+ CONSTRAINT [PK_ORDER_STATUS] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 85) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+INSERT INTO [ORDER_STATUS] ([STATUS]) VALUES('PLACED'),('READY'), ('DELIVERED')
+
+
+/****** Object:  Table [ORDER]    Script Date: 12/6/2019 4:53:18 PM ******/
+
+CREATE TABLE [ORDER](
+	
+	[ID] [UNIQUEIDENTIFIER] NOT NULL,
+	[USER_ID] [UNIQUEIDENTIFIER] NOT NULL FOREIGN KEY REFERENCES [USER](ID),
+	[MENU_ID] [UNIQUEIDENTIFIER] FOREIGN KEY REFERENCES [MENU](ID),
+	[QUANTITY] [INT] NOT NULL,
+	[ORDER_STATUS_ID] [UNIQUEIDENTIFIER] NOT NULL FOREIGN KEY REFERENCES [ORDER_STATUS]([ID]),
+	[COMMENTS] [VARCHAR](200) NULL,
+	[CREATEDDATE] [DATETIME] DEFAULT GETDATE(),
+	[UPDATEDATE] [DATETIME] DEFAULT GETDATE(),
+
+ CONSTRAINT [PK_ORDER] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC,
+	[USER_ID] ASC,
+	[MENU_ID] ASC,
+	[QUANTITY] ASC,
+	[CREATEDDATE] ASC
+
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 85) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+--SELECT * FROM [FOOD_CATEGORY]
+--SELECT * FROM [MENU]
+--SELECT * FROM [ORDER]
+--SELECT * FROM [ORDER_STATUS]
+--SELECT * FROM [ROLE]
+--SELECT * FROM [USER]
+
+
+GO
+--[GET_ORDER] 'Test'
+CREATE PROCEDURE [GET_USER_ORDER]
+	@Username NVARCHAR(100)
+AS
+BEGIN
+		SELECT o.ID
+			 , o.MENU_ID
+			 , o.[ORDER_STATUS_ID]
+			 , os.[STATUS]
+			 , o.[QUANTITY]
+			 , o.[USER_ID]
+			 , m.[NAME]
+			 , m.PRICE
+			 , m.FOOD_CATEGORY_ID
+			 , fc.CATEGORY
+
+		FROM [ORDER] o
+		INNER JOIN [USER]  u
+			ON o.[USER_ID] = u.[ID]
+		JOIN [MENU] m
+			ON o.MENU_ID = m.ID 
+		JOIN [FOOD_CATEGORY] fc
+			ON m.FOOD_CATEGORY_ID= fc.ID
+		JOIN [ORDER_STATUS] os
+			ON os.ID = o.ORDER_STATUS_ID
+			WHERE u.[USERNAME] = @Username
+
+END
+GO
+
+GO
+--[GET_ORDER] 'Test'
+CREATE PROCEDURE [GET_ORDER_ON_STATUS]
+	@OrderStatusID [UNIQUEIDENTIFIER]
+AS
+BEGIN
+		SELECT o.ID
+			 , o.MENU_ID
+			 , o.[ORDER_STATUS_ID]
+			 , os.[STATUS]
+			 , o.[QUANTITY]
+			 , o.[USER_ID]
+			 , m.[NAME]
+			 , m.PRICE
+			 , m.FOOD_CATEGORY_ID
+			 , fc.CATEGORY
+			 , u.[NAME]
+			 , u.[ADDRESS]
+			 , u.ALTERNATE_ADDRESS
+		FROM [ORDER] o
+		INNER JOIN[MENU] m
+			ON o.MENU_ID = m.ID 
+		INNER JOIN [FOOD_CATEGORY] fc
+			ON m.FOOD_CATEGORY_ID= fc.ID
+		INNER JOIN [ORDER_STATUS] os
+			ON os.ID = o.ORDER_STATUS_ID
+		INNER JOIN [USER] u
+			ON o.[USER_ID] = u.[ID]
+			WHERE o.[ORDER_STATUS_ID] = @OrderStatusID
+
+END
+GO
+
+--[CREATE_ORDER] 'Test', '12345'
+CREATE PROCEDURE [CREATE_ORDER]
+	@ID [UNIQUEIDENTIFIER], 
+	@UserID [UNIQUEIDENTIFIER], 
+	@MenuID  [UNIQUEIDENTIFIER], 
+	@Quantity [INT],
+	@Comment NVARCHAR(200)
+AS
+BEGIN
+		INSERT INTO [ORDER]
+			( [ID]
+			, [USER_ID] 
+			, [MENU_ID] 
+			, [QUANTITY]
+			, [ORDER_STATUS_ID]
+			, [COMMENTS])
+			(SELECT @ID
+			, @UserID
+			, @MenuID
+			, @Quantity
+			, os.ID
+			, @Comment
+		FROM [ORDER_STATUS] os
+			WHERE os.STATUS = 'PLACED')
+END
+GO
+
+--[CREATE_ORDER] 'Test', '12345'
+CREATE PROCEDURE [UPDATE_ORDER]
+	@OrderID  [UNIQUEIDENTIFIER], 
+	@OrderStatusID [UNIQUEIDENTIFIER]
+AS
+BEGIN
+		UPDATE [OREDR]
+			SET [ORDER_STATUS_ID] = os.ID
+		FROM [ORDER] o
+		JOIN [ORDER_STATUS] os
+			ON os.ID = @OrderStatusID
+		WHERE o.[ID] = @OrderID
+END
+GO
+
+CREATE PROCEDURE [CREATE_MENU]
+	@Name [INT],
+	@Price [DECIMAL],
+	@Description [NVARCHAR](500),
+	@FoodcategoryID [UNIQUEIDENTIFIER]
+AS
+BEGIN
+		INSERT INTO [MENU]
+			( [NAME],
+			  [PRICE],
+			  [DESCRIPTION],
+			  [FOOD_CATEGORY_ID])
+			(SELECT 
+			  @Name
+			, @Price
+			, @Description
+			, @FoodcategoryID)
+END
+GO
+
+CREATE PROCEDURE [GET_MENU]
+AS
+BEGIN
+		SELECT m.ID
+			, m.[NAME]
+			, m.[DESCRIPTION]
+			, m.PRICE
+			, m.FOOD_CATEGORY_ID
+			, fc.CATEGORY
+		FROM [MENU] m
+		 JOIN [FOOD_CATEGORY] fc
+			ON m.FOOD_CATEGORY_ID = fc.ID
+END
+GO
+
+
+CREATE PROCEDURE [REMOVE_MENU]
+	@ID [UNIQUEIDENTIFIER]
+AS
+BEGIN
+		UPDATE [MENU] 
+			SET 
+				[IS_DELETED] = 1
+			WHERE [ID] = @ID
+END
+GO
+
+ INSERT_USER 'Test', '12345', 'Test User','test@FDD.com', '888-888-8881','Test Address 1',' Alternate Test Address 1', 'User'
+ GO
+ INSERT_USER 'Admin', '12345','Admin User', 'admin@FDD.com', '888-888-8882','Test Address 2',' Alternate Test Address 2', 'Administrator'
+ GO
+ SELECT * FROM [USER]
+GO
