@@ -1,4 +1,6 @@
 ﻿using FDDWeb.Models;
+using FDDWeb.Utility;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Configuration;
 using System.Data;
@@ -9,15 +11,13 @@ namespace FDDWeb.DAO
     public interface IUserDao
     {
         bool Register(ApplicationUser user);
-        LoginStatus IsValidUser(string username, string password);
+        ApplicationUser IsValidUser(string username, string password);
     }
 
     public class UserDao : IUserDao
     {
-        public LoginStatus IsValidUser(string username, string password)
+        public ApplicationUser IsValidUser(string username, string password)
         {
-            Guid userId;
-            int status = 0;
             string roles = string.Empty;
             string constr = ConfigurationManager.ConnectionStrings["FDDConnection"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
@@ -29,20 +29,32 @@ namespace FDDWeb.DAO
                     cmd.Parameters.AddWithValue("@Password", password);
                     cmd.Connection = con;
                     con.Open();
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    reader.Read();
-                    userId = new Guid(Convert.ToString(reader["ID"]));
-                    status = Convert.ToInt32(reader["STATUS"]);
-                    roles = reader["ROLE"].ToString();
-                    con.Close();
+                    ApplicationUser user = null;
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            user = new ApplicationUser
+                            {
+                                UserID = reader.GetFieldValue<Guid>("ID"),
+
+                                Status = (LoginStatus)reader.GetFieldValue<int>("STATUS"),
+                                Name = reader.GetFieldValue<string>("NAME"),
+                                Phone = reader.GetFieldValue<string>("PHONE"),
+                                Email = reader.GetFieldValue<string>("EMAIL"),
+                                Address = reader.GetFieldValue<string>("ADDRESS"),
+                                AlternateAddress = reader.GetFieldValue<string>("ALTERNATE_ADDRESS"),
+
+                                //Roles = reader.GetFieldValue<string>("ROLE");
+                            };
+                            var role = new IdentityUserRole();
+                            role.RoleId = reader.GetFieldValue<string>("ROLE");
+                            user.Roles.Add(role);
+                        }
+                            return user;
+                    }
                 }
-                switch (status)
-                {
-                    case -1:
-                        return LoginStatus.Failure;
-                    default:
-                        return LoginStatus.Success;
-                }
+
             }
         }
 

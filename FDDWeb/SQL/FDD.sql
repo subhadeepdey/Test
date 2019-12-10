@@ -174,13 +174,20 @@ BEGIN
 			WHERE ID = @ID
 		
 		-- User Valid
-		SELECT [USER].[ID], 
-			0 AS [STATUS], 
-			[ROLE] 
-			FROM [USER] 
-			LEFT JOIN [ROLE]
-			ON [USER].[ROLE_ID] = [ROLE].[ID]
-			WHERE [USER].[ID] = @ID
+		SELECT u.[ID] 
+			, u.[USERNAME]
+			, u.[Name]
+			, u.[EMAIL]
+			, u.[PHONE]
+			, u.[ADDRESS]
+			, u.[ALTERNATE_ADDRESS]
+			, u.[ADDRESS]
+			, 0 AS [STATUS] 
+			, r.[ROLE] 
+			FROM [USER] u
+			LEFT JOIN [ROLE] r
+			ON u.[ROLE_ID] = r.[ID]
+			WHERE u.[ID] = @ID
 	END
 	ELSE
 	BEGIN
@@ -190,6 +197,7 @@ BEGIN
 		NULL AS [ROLE]-- User invalid.
 	END
 END
+
 GO
 
 

@@ -11,7 +11,7 @@ namespace FDDWeb.BLL
     public interface IUserLogic
     {
         bool Register(ApplicationUser user);
-        LoginStatus IsValidUser(string username, string password);
+        ApplicationUser IsValidUser(string username, string password);
     }
     public class UserLogic : IUserLogic
     {
@@ -24,7 +24,7 @@ namespace FDDWeb.BLL
 
         public bool Register(ApplicationUser user) => userDao.Register(user);
 
-        public LoginStatus IsValidUser(string username, string password)
+        public ApplicationUser IsValidUser(string username, string password)
         {
             return userDao.IsValidUser(username, password);
         }

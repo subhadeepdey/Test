@@ -42,33 +42,27 @@ namespace FDDWeb.Account
                 //// To enable password failures to trigger lockout, change to shouldLockout: true
                 // var result = signinManager.PasswordSignIn(Email.Text, Password.Text, RememberMe.Checked, shouldLockout: false);
                 SignInStatus result = SignInStatus.Success;
-                var status = userLogic.IsValidUser(Username.Text, Password.Text);
-                switch (status)
+                var user = userLogic.IsValidUser(Username.Text, Password.Text);
+                if (user != null)
                 {
-                    case LoginStatus.Success:
-                        var roles = "User";
-                        FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, Username.Text, DateTime.Now,
-                            DateTime.Now.AddMinutes(2880), RememberMe.Checked, roles, FormsAuthentication.FormsCookiePath);
-                        string hash = FormsAuthentication.Encrypt(ticket);
-                        HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, hash);
+                    var role = user.Roles;
+                    FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, Username.Text, DateTime.Now,
+                        DateTime.Now.AddMinutes(2880), RememberMe.Checked, "User", FormsAuthentication.FormsCookiePath);
+                    string hash = FormsAuthentication.Encrypt(ticket);
+                    HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, hash);
 
-                        if (ticket.IsPersistent)
-                        {
-                            cookie.Expires = ticket.Expiration;
-                        }
-                        Response.Cookies.Add(cookie);
-                        Response.Redirect(FormsAuthentication.GetRedirectUrl(Username.Text, RememberMe.Checked));
-                        IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
-                        break;
-                    case LoginStatus.InActive:
-                        Response.Redirect("/Account/Lockout");
-                        break;
-
-                    case LoginStatus.Failure:
-                    default:
-                        FailureText.Text = "Invalid login attempt";
-                        ErrorMessage.Visible = true;
-                        break;
+                    if (ticket.IsPersistent)
+                    {
+                        cookie.Expires = ticket.Expiration;
+                    }
+                    Response.Cookies.Add(cookie);
+                    Response.Redirect(FormsAuthentication.GetRedirectUrl(Username.Text, RememberMe.Checked));
+                    IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
+                }
+                else
+                {
+                    FailureText.Text = "Invalid login attempt";
+                    ErrorMessage.Visible = true;
                 }
             }
         }
