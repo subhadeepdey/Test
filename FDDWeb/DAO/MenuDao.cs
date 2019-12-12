@@ -12,7 +12,8 @@ namespace FDDWeb.DAO
     {
         bool AddMenu(MenuItem item);
         IList<MenuItem> GetMenuItems();
-
+        IList<FoodCategory> GetFoodCategories();
+        bool DeleteMenu(Guid ID);
     }
     public class MenuDao : IMenuDao
     {
@@ -27,7 +28,24 @@ namespace FDDWeb.DAO
                     cmd.Parameters.AddWithValue("@Name", menu.Name);
                     cmd.Parameters.AddWithValue("@Price", menu.Price);
                     cmd.Parameters.AddWithValue("@Description", menu.Description);
-                    cmd.Parameters.AddWithValue("@FoodCategoryID", menu.CategoryID);
+                    cmd.Parameters.AddWithValue("@FoodCategoryID", menu.FoodCategoryID);
+                    cmd.Connection = con;
+                    con.Open();
+                    var result = cmd.ExecuteNonQuery();
+                    return result > 0;
+                }
+            }
+        }
+
+        public bool DeleteMenu(Guid ID)
+        {
+            string constr = ConfigurationManager.ConnectionStrings["FDDConnection"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand("REMOVE_MENU"))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@ID", ID);
                     cmd.Connection = con;
                     con.Open();
                     var result = cmd.ExecuteNonQuery();
@@ -58,11 +76,39 @@ namespace FDDWeb.DAO
                                 Name = reader.GetFieldValue<string>("NAME"),
                                 Description = reader.GetFieldValue<string>("DESCRIPTION"),
                                 Price = reader.GetFieldValue<decimal>("PRICE"),
-                                CategoryID = reader.GetFieldValue<Guid>("FOOD_CATEGORY_ID"),
-                                Category = reader.GetFieldValue<string>("CATEGORY"),
+                                FoodCategoryID = reader.GetFieldValue<Guid>("FOOD_CATEGORY_ID"),
+                                FoodCategory = reader.GetFieldValue<string>("CATEGORY"),
                             });
                         }
                         return menuItems;
+                    }
+                }
+            }
+        }
+
+        public IList<FoodCategory> GetFoodCategories()
+        {
+            string constr = ConfigurationManager.ConnectionStrings["FDDConnection"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand("GET_FOOD_CATEGORY"))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Connection = con;
+                    con.Open();
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        IList<FoodCategory> foodCategories = new List<FoodCategory>();
+                        while (reader.Read())
+                        {
+                            foodCategories.Add(new FoodCategory
+                            {
+                                ID = reader.GetFieldValue<Guid>("ID"),
+                                Category = reader.GetFieldValue<string>("CATEGORY"),
+                            });
+                        }
+                        return foodCategories;
                     }
                 }
             }

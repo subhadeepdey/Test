@@ -18,6 +18,7 @@ namespace FDDWeb
 
         protected void Page_Init(object sender, EventArgs e)
         {
+            var aa = Context.User.Identity;
             // The code below helps to protect against XSRF attacks
             var requestCookie = Request.Cookies[AntiXsrfTokenKey];
             Guid requestCookieGuidValue;

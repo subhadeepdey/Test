@@ -1,4 +1,5 @@
 
+	
 USE [FDD]
 GO
 
@@ -23,6 +24,8 @@ GO
 DROP PROCEDURE [CREATE_MENU]
 GO
 DROP PROCEDURE [CREATE_ORDER]
+GO
+DROP PROCEDURE [GET_FOOD_CATEGORY]
 GO
 DROP PROCEDURE [GET_MENU]
 GO
@@ -63,7 +66,7 @@ GO
 SET ANSI_PADDING OFF
 GO
 
-INSERT INTO [ROLE]([ROLE]) VALUES ('Administrator'), ('User')
+INSERT INTO [ROLE]([ROLE]) VALUES ('Admin'), ('Customer')
 SELECT * FROM [ROLE]
 
 /****** Object:  Table [USER]    Script Date: 01/03/2014 16:36:00 ******/
@@ -133,7 +136,7 @@ BEGIN
 			   ,[ROLE_ID]
 			   )
 		(SELECT
-			   @Username
+  			   @Username
 			   ,@Password
 			   ,@Name
 			   ,@Email
@@ -144,10 +147,19 @@ BEGIN
 			   FROM [ROLE] r WHERE
 			   r.[ROLE] = @Role)
 		
-		SELECT [USER].[ID], [ROLE], 0 AS [STATUS] 
-			FROM [USER] 
-			LEFT JOIN [ROLE]
-			ON [USER].[ROLE_ID] = [ROLE].[ID]
+			SELECT u.[ID] 
+			, u.[USERNAME]
+			, u.[Name]
+			, u.[EMAIL]
+			, u.[PHONE]
+			, u.[ADDRESS]
+			, u.[ALTERNATE_ADDRESS]
+			, u.[ADDRESS]
+			, 0 AS [STATUS] 
+			, r.[ROLE] 
+			FROM [USER] u
+			LEFT JOIN [ROLE] r
+			ON u.[ROLE_ID] = r.[ID]
 			WHERE [USERNAME] = @Username
      END
 END
@@ -157,8 +169,8 @@ GO
 GO
 --[VALIDATE_USER] 'Test', '12345'
 CREATE PROCEDURE [VALIDATE_USER]
-	@Username NVARCHAR(20),
-	@Password NVARCHAR(20)
+	@Username NVARCHAR(100),
+	@Password NVARCHAR(100)
 AS
 BEGIN
 	SET NOCOUNT ON;
@@ -219,9 +231,9 @@ SELECT * FROM [FOOD_CATEGORY]
 
 CREATE TABLE [MENU](
 	[ID] [UNIQUEIDENTIFIER] NOT NULL DEFAULT NEWID(),
-	[NAME] [VARCHAR](50) NOT NULL,
+	[NAME] [NVARCHAR](100) NOT NULL,
 	[PRICE] [DECIMAL] NOT NULL,
-	[DESCRIPTION] [VARCHAR](200) NOT NULL,
+	[DESCRIPTION] [NVARCHAR](200) NOT NULL,
 	[IS_DELETED] [BIT] NOT NULL DEFAULT 0,
 	FOOD_CATEGORY_ID [UNIQUEIDENTIFIER] FOREIGN KEY REFERENCES [FOOD_CATEGORY](ID)
 
@@ -389,7 +401,7 @@ END
 GO
 
 CREATE PROCEDURE [CREATE_MENU]
-	@Name [INT],
+	@Name [NVARCHAR],
 	@Price [DECIMAL],
 	@Description [NVARCHAR](500),
 	@FoodcategoryID [UNIQUEIDENTIFIER]
@@ -407,6 +419,14 @@ BEGIN
 			, @FoodcategoryID)
 END
 GO
+CREATE PROCEDURE [GET_FOOD_CATEGORY]
+AS
+BEGIN
+		SELECT fc.ID
+			, fc.CATEGORY
+		FROM[FOOD_CATEGORY] fc
+END
+GO
 
 CREATE PROCEDURE [GET_MENU]
 AS
@@ -420,6 +440,7 @@ BEGIN
 		FROM [MENU] m
 		 JOIN [FOOD_CATEGORY] fc
 			ON m.FOOD_CATEGORY_ID = fc.ID
+		WHERE m.[IS_DELETED] = 0
 END
 GO
 
@@ -435,9 +456,14 @@ BEGIN
 END
 GO
 
- INSERT_USER 'Test', '12345', 'Test User','test@FDD.com', '888-888-8881','Test Address 1',' Alternate Test Address 1', 'User'
+ INSERT_USER 'Test1', '827ccb0eea8a706c4c34a16891f84e7b', 'Test User1','test1@FDD.com', '888-888-8881','Test Address 1',' Alternate Test Address 1', 'Customer'
  GO
- INSERT_USER 'Admin', '12345','Admin User', 'admin@FDD.com', '888-888-8882','Test Address 2',' Alternate Test Address 2', 'Administrator'
+ INSERT_USER 'Admin1', '827ccb0eea8a706c4c34a16891f84e7b','Admin User1', 'admin1@FDD.com', '888-888-8882','Test Address 2',' Alternate Test Address 2', 'Admin'
  GO
  SELECT * FROM [USER]
+ GO
+ SELECT * FROM FOOD_CATEGORY
+ Go
+ CREATE_MENU 'Samosa', 4, 'fried item', '3E96507A-A039-465E-B631-F9CA9E2D766E'
+
 GO

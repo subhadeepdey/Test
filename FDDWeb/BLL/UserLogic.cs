@@ -10,8 +10,8 @@ namespace FDDWeb.BLL
 {
     public interface IUserLogic
     {
-        bool Register(ApplicationUser user);
-        ApplicationUser IsValidUser(string username, string password);
+        User Register(User user);
+        User IsValidUser(string username, string password);
     }
     public class UserLogic : IUserLogic
     {
@@ -22,9 +22,9 @@ namespace FDDWeb.BLL
             this.userDao = userDao;
         }
 
-        public bool Register(ApplicationUser user) => userDao.Register(user);
+        public User Register(User user) => userDao.Register(user);
 
-        public ApplicationUser IsValidUser(string username, string password)
+        public User IsValidUser(string username, string password)
         {
             return userDao.IsValidUser(username, password);
         }

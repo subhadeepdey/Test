@@ -19,6 +19,7 @@ namespace FDDWeb.Models
         public string Address { get; set; }
         public string AlternateAddress { get; set; }
         public LoginStatus Status { get; set; }
+        public string Role { get; set; }
 
         public ClaimsIdentity GenerateUserIdentity(ApplicationUserManager manager)
         {

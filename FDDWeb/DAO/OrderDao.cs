@@ -70,8 +70,8 @@ namespace FDDWeb.DAO
                                 ID = reader.GetFieldValue<Guid>("ID"),
                                 MenuItem = Tuple.Create(new MenuItem
                                 {
-                                    Category = reader.GetFieldValue<string>("CATEGORY"),
-                                    CategoryID = reader.GetFieldValue<Guid>("FOOD_CATEGORY_ID"),
+                                    FoodCategory = reader.GetFieldValue<string>("CATEGORY"),
+                                    FoodCategoryID = reader.GetFieldValue<Guid>("FOOD_CATEGORY_ID"),
                                     Name = reader.GetFieldValue<string>("NAME"),
                                     Price = reader.GetFieldValue<decimal>("PRICE"),
                                     MenuID = reader.GetFieldValue<Guid>("MENU_ID")
