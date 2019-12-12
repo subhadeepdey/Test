@@ -5,7 +5,7 @@ using System;
 
 namespace FDDWeb.Admin
 {
-    public partial class Manage : System.Web.UI.Page
+    public partial class ManageMenu : System.Web.UI.Page
     {
         [Dependency]
         public MenuLogic menuLogic { get; set; }
@@ -20,6 +20,7 @@ namespace FDDWeb.Admin
                 LoadMenu();
             }
         }
+
         protected void AddMenu(object sender, EventArgs e)
         {
             menuLogic.AddMenu(new MenuItem
@@ -47,6 +48,7 @@ namespace FDDWeb.Admin
             Description.Text = string.Empty;
             Price.Text = string.Empty;
         }
+
         private void LoadCategory()
         {
             // Load Category

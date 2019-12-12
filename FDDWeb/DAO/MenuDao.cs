@@ -11,8 +11,13 @@ namespace FDDWeb.DAO
     public interface IMenuDao
     {
         bool AddMenu(MenuItem item);
+
         IList<MenuItem> GetMenuItems();
+
+        IList<MenuItem> GetMenuItemsByCategory(Guid categoryID);
+
         IList<FoodCategory> GetFoodCategories();
+
         bool DeleteMenu(Guid ID);
     }
     public class MenuDao : IMenuDao
@@ -113,5 +118,39 @@ namespace FDDWeb.DAO
                 }
             }
         }
+
+        public IList<MenuItem> GetMenuItemsByCategory(Guid categoryID)
+        {
+            string constr = ConfigurationManager.ConnectionStrings["FDDConnection"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand("GET_MENU_BY_CATEGORY"))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@CategoryID", categoryID);
+
+                    cmd.Connection = con;
+                    con.Open();
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        IList<MenuItem> menuItems = new List<MenuItem>();
+                        while (reader.Read())
+                        {
+                            menuItems.Add(new MenuItem
+                            {
+                                MenuID = reader.GetFieldValue<Guid>("ID"),
+                                Name = reader.GetFieldValue<string>("NAME"),
+                                Description = reader.GetFieldValue<string>("DESCRIPTION"),
+                                Price = reader.GetFieldValue<decimal>("PRICE"),
+                                FoodCategoryID = reader.GetFieldValue<Guid>("FOOD_CATEGORY_ID"),
+                                FoodCategory = reader.GetFieldValue<string>("CATEGORY"),
+                            });
+                        }
+                        return menuItems;
+                    }
+                }
+            }
+        }
+
     }
 }

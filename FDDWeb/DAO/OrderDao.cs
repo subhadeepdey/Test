@@ -11,13 +11,36 @@ namespace FDDWeb.DAO
     public interface IOrderDao
     {
         IList<Order> GetOrdersOnStatus(Guid orderStatusID);
+
         bool UpdateOrder(Guid orderID, Guid orderStatusID);
 
         bool CreateOrder(Order order);
+
+        bool AddMenuToOrder(string username, Guid menuID, int quantity);
     }
 
     public class OrderDao : IOrderDao
     {
+        public bool AddMenuToOrder(string username, Guid menuID, int quantity)
+        {
+            string constr = ConfigurationManager.ConnectionStrings["FDDConnection"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand("ADD_MENU_TO_ORDER"))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Username", username);
+                    cmd.Parameters.AddWithValue("@MenuID", menuID);
+                    cmd.Parameters.AddWithValue("@Quantity", quantity);
+                    cmd.Connection = con;
+                    con.Open();
+                    var result = cmd.ExecuteNonQuery();
+                    if (!(result > 0)) return false;
+                    return true;
+                }
+            }
+        }
+
         public bool CreateOrder(Order order)
         {
             string constr = ConfigurationManager.ConnectionStrings["FDDConnection"].ConnectionString;

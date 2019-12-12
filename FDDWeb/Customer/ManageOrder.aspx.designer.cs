@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FDDWeb.Account {
+namespace FDDWeb.Customer {
     
     
-    public partial class AddPhoneNumber {
+    public partial class ManageOrder {
         
         /// <summary>
         /// ErrorMessage control.
@@ -22,12 +22,12 @@ namespace FDDWeb.Account {
         protected global::System.Web.UI.WebControls.Literal ErrorMessage;
         
         /// <summary>
-        /// PhoneNumber control.
+        /// Orders control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox PhoneNumber;
+        protected global::System.Web.UI.WebControls.Repeater Orders;
     }
 }

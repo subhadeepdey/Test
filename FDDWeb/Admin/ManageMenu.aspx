@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Manage Menu" Language="C#" AutoEventWireup="true" CodeBehind="Manage.aspx.cs" Inherits="FDDWeb.Admin.Manage" MasterPageFile="~/Site.Master" Async="true" %>
+﻿<%@ Page Title="Manage Menu" Language="C#" AutoEventWireup="true" CodeBehind="ManageMenu.aspx.cs" Inherits="FDDWeb.Admin.ManageMenu" MasterPageFile="~/Site.Master" Async="true" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
     <h2><%: Title %>.</h2>
@@ -38,14 +38,14 @@
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <asp:Button runat="server" OnClick="AddMenu" Text="Add Menu Item" CssClass="btn btn-default" />
-                    <asp:Button runat="server" Text="Reset" CssClass="btn btn-default" />
+                    <asp:Button runat="server" OnClick="Reset" Text="Reset" CssClass="btn btn-default" />
                 </div>
             </div>
             <hr />
 
             <asp:Repeater ID="Menu" runat="server">
                 <HeaderTemplate>
-                    <table class="col-md-12 table-hover">
+                    <table class="col-md-12 table-hover" style="padding:2px">
                         <thead class="thead-light">
                             <tr>
                                 <th>
@@ -69,24 +69,24 @@
                 <ItemTemplate>
                     <tbody>
                         <tr>
-                            <td>
+                            <td class="table-column">
                                 <asp:Label runat="server" CssClass="control-label"><%#Eval("FoodCategory") %></asp:Label>
 
                             </td>
 
-                            <td>
+                            <td class="table-column">
                                 <asp:Label runat="server" CssClass="control-label"><%#Eval("Name") %></asp:Label>
 
                             </td>
-                            <td>
+                            <td class="table-column">
                                 <asp:Label runat="server" CssClass="control-label"><%#Eval("Description") %></asp:Label>
 
                             </td>
-                            <td>
+                            <td class="table-column">
                                 <asp:Label runat="server" CssClass="control-label"><%#Eval("Price") %></asp:Label>
 
                             </td>
-                            <td>
+                            <td class="table-column">
                                 <asp:Button runat="server" Text="Delete" OnCommand="DeleteMenu" CausesValidation="false" CommandArgument='<%#Eval("MenuID") %>' />
                             </td>
                         </tr>
@@ -96,17 +96,6 @@
                     </table>
                 </FooterTemplate>
             </asp:Repeater>
-
-            <table class="table">
-                <tbody>
-                    <tr runat="server" id="itemPlaceholder"></tr>
-                </tbody>
-            </table>
-
-        </div>
-
-        <div class="form-group">
-            Order status update
         </div>
     </div>
 </asp:Content>
