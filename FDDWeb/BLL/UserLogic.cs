@@ -1,5 +1,6 @@
 ﻿using FDDWeb.DAO;
 using FDDWeb.Models;
+using FDDWeb.Utility;
 using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,9 @@ namespace FDDWeb.BLL
     {
         User Register(User user);
         User IsValidUser(string username, string password);
+        IList<User> GetUsers();
+        bool UpgradeToPremium(string username);
+        bool UpdateUserRole(string username, string role);
     }
     public class UserLogic : IUserLogic
     {
@@ -24,9 +28,16 @@ namespace FDDWeb.BLL
 
         public User Register(User user) => userDao.Register(user);
 
-        public User IsValidUser(string username, string password)
+        public User IsValidUser(string username, string password) => userDao.IsValidUser(username, password);
+
+        public IList<User> GetUsers()
         {
-            return userDao.IsValidUser(username, password);
+            var users = userDao.GetUsers();
+            return users.Where(u => u.Role != Constants.ADMIN_ROLE && !u.IsPremium).ToList();
         }
+
+        public bool UpgradeToPremium(string username) => userDao.UpgradeToPremium(username);
+
+        public bool UpdateUserRole(string username, string role) => userDao.UpdateUserRole(username, role);
     }
 }

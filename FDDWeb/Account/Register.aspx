@@ -9,6 +9,9 @@
         <p class="text-danger">
             <asp:Literal runat="server" ID="ErrorMessage" />
         </p>
+        <p class="text-success">
+            <asp:Literal runat="server" ID="SuccessMessage" />
+        </p>
         <asp:ValidationSummary runat="server" CssClass="text-danger" />
         <div class="form-group">
             <asp:Label runat="server" AssociatedControlID="Username" CssClass="col-md-2 control-label">Username</asp:Label>
@@ -73,6 +76,12 @@
             <asp:Label runat="server" AssociatedControlID="AlternateAddress" CssClass="col-md-2 control-label">Alternate address</asp:Label>
             <div class="col-md-10">
                 <asp:TextBox runat="server" ID="AlternateAddress" CssClass="form-control" TextMode="MultiLine" />
+            </div>
+        </div>
+        <div class="form-group" runat="server" ID="AddUserAsAdmin">
+            <asp:Label runat="server" AssociatedControlID="AdminUser" CssClass="col-md-2 control-label">Admin User</asp:Label>
+            <div class="col-md-10">
+                <asp:CheckBox runat="server" ID="AdminUser" CssClass="form-control" />
             </div>
         </div>
         <div class="form-group">

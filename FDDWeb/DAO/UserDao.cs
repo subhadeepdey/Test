@@ -2,6 +2,7 @@
 using FDDWeb.Utility;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -12,10 +13,48 @@ namespace FDDWeb.DAO
     {
         User Register(User user);
         User IsValidUser(string username, string password);
+        IList<User> GetUsers();
+        bool UpgradeToPremium(string username);
+        bool UpdateUserRole(string username, string role);
     }
 
     public class UserDao : IUserDao
     {
+        public IList<User> GetUsers()
+        {
+            string constr = ConfigurationManager.ConnectionStrings["FDDConnection"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand("GET_USERS"))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Connection = con;
+                    con.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        IList<User> users = new List<User>();
+                        while (reader.Read())
+                        {
+                            users.Add(new User
+                            {
+                                UserID = reader.GetFieldValue<Guid>("ID"),
+                                Username = reader.GetFieldValue<string>("USERNAME"),
+                                Status = (LoginStatus)reader.GetFieldValue<int>("STATUS"),
+                                Name = reader.GetFieldValue<string>("NAME"),
+                                Phone = reader.GetFieldValue<string>("PHONE"),
+                                Email = reader.GetFieldValue<string>("EMAIL"),
+                                Address = reader.GetFieldValue<string>("ADDRESS"),
+                                AlternateAddress = reader.GetFieldValue<string>("ALTERNATE_ADDRESS"),
+                                Role = reader.GetFieldValue<string>("ROLE"),
+                                IsPremium = reader.GetFieldValue<bool>("IS_PREMIUM"),
+                            });
+                        }
+                        return users;
+                    }
+                }
+            }
+        }
+
         public User IsValidUser(string username, string password)
         {
             string roles = string.Empty;
@@ -93,6 +132,41 @@ namespace FDDWeb.DAO
                         }
                         return newUser;
                     }
+                }
+            }
+        }
+
+        public bool UpgradeToPremium(string username)
+        {
+            string roles = string.Empty;
+            string constr = ConfigurationManager.ConnectionStrings["FDDConnection"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand("UPGRADE_USER"))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Username", username);
+                    cmd.Connection = con;
+                    con.Open();
+                    return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+        }
+
+        public bool UpdateUserRole(string username, string role)
+        {
+            string roles = string.Empty;
+            string constr = ConfigurationManager.ConnectionStrings["FDDConnection"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand("UPGRADE_USER"))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Username", username);
+                    cmd.Parameters.AddWithValue("@Role", role);
+                    cmd.Connection = con;
+                    con.Open();
+                    return cmd.ExecuteNonQuery() > 0;
                 }
             }
         }

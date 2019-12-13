@@ -209,6 +209,7 @@
     <Content Include="About.aspx" />
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
+    <Content Include="Admin\ManageSite.aspx" />
     <Content Include="Admin\ManageMenu.aspx" />
     <Content Include="Admin\ManageOrder.aspx" />
     <Content Include="App_Data\FDD.mdf" />
@@ -291,6 +292,13 @@
     </Compile>
     <Compile Include="Account\Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ManageSite.aspx.cs">
+      <DependentUpon>ManageSite.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ManageSite.aspx.designer.cs">
+      <DependentUpon>ManageSite.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\ManageMenu.aspx.cs">
       <DependentUpon>ManageMenu.aspx</DependentUpon>

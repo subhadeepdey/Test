@@ -14,6 +14,10 @@ namespace FDDWeb.Account
         [Dependency]
         public IUserLogic userLogic { get; set; }
 
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            AddUserAsAdmin.Visible = IS_ADMIN;
+        }
         protected void CreateUser_Click(object sender, EventArgs e)
         {
             var user = userLogic.Register(new User
@@ -25,10 +29,18 @@ namespace FDDWeb.Account
                 Phone = Phone.Text,
                 Address = Address.Text,
                 AlternateAddress = AlternateAddress.Text,
-                Role = Constants.DEFAULT_ROLE
+                Role = (IS_ADMIN && AdminUser.Checked) ? Constants.ADMIN_ROLE : Constants.DEFAULT_ROLE
             });
             if (user != null)
             {
+                // Admin User Added
+                if (string.IsNullOrEmpty(USERNAME) && IS_ADMIN)
+                {
+                    SuccessMessage.Text = "User created successfully";
+                    SuccessMessage.Visible = true;
+                    return;
+                }
+
                 FormsAuthentication.SetAuthCookie(user.Username, false);
 
                 var authTicket = new FormsAuthenticationTicket(1, user.Username, DateTime.Now, DateTime.Now.AddMinutes(20), false, user.Role);
@@ -36,7 +48,6 @@ namespace FDDWeb.Account
                 var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
                 HttpContext.Current.Response.Cookies.Add(authCookie);
                 IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
-                //Response.Redirect("/Home");
             }
 
             else
@@ -45,27 +56,6 @@ namespace FDDWeb.Account
                 ErrorMessage.Visible = true;
                 Response.Redirect("/Account/Login");
             }
-
-            //var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            //var signInManager = Context.GetOwinContext().Get<ApplicationSignInManager>();
-            //var user = new User() { Username = Email.Text, Email = Email.Text };
-            //var aa = userLogic.Register(user);
-
-            //IdentityResult result = manager.Create(user, Password.Text);
-            //if (result.Succeeded)
-            //{
-            //    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-            //    //string code = manager.GenerateEmailConfirmationToken(user.Id);
-            //    //string callbackUrl = IdentityHelper.GetUserConfirmationRedirectUrl(code, user.Id, Request);
-            //    //manager.SendEmail(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>.");
-
-            //    signInManager.SignIn( user, isPersistent: false, rememberBrowser: false);
-            //    IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
-            //}
-            //else 
-            //{
-            //    ErrorMessage.Text = result.Errors.FirstOrDefault();
-            //}
         }
     }
 }

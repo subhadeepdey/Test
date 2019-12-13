@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace FDDWeb.Models
 {
@@ -17,6 +14,6 @@ namespace FDDWeb.Models
         public string AlternateAddress { get; set; }
         public LoginStatus Status { get; set; }
         public string Role { get; set; }
-
+        public bool IsPremium { get; set; }
     }
 }
