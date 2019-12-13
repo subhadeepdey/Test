@@ -31,9 +31,12 @@
             </div>
             <div class="col-md-3">
                 <asp:Label runat="server" AssociatedControlID="Price" CssClass="col-md-2 control-label">Price</asp:Label>
-                <asp:TextBox runat="server" ID="Price" CssClass="form-control" TextMode="Number" />
+                <asp:TextBox runat="server" ID="Price" CssClass="form-control" />
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="Price"
                     CssClass="text-danger" ErrorMessage="The price field is required." />
+                <asp:RegularExpressionValidator runat="server" ControlToValidate="Price"
+                    CssClass="text-danger" ErrorMessage="Numbers only allowed e.g. 100 or 100.00" ValidationExpression="^\d+(\.\d\d)?$"></asp:RegularExpressionValidator>
+
             </div>
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
@@ -45,7 +48,7 @@
 
             <asp:Repeater ID="Menu" runat="server">
                 <HeaderTemplate>
-                    <table class="col-md-12 table-hover" style="padding:2px">
+                    <table class="col-md-12 table-hover" style="padding: 2px">
                         <thead class="thead-light">
                             <tr>
                                 <th>
@@ -94,6 +97,7 @@
                 </ItemTemplate>
                 <FooterTemplate>
                     </table>
+               
                 </FooterTemplate>
             </asp:Repeater>
         </div>
