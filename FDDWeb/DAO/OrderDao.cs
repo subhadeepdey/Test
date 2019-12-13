@@ -11,9 +11,9 @@ namespace FDDWeb.DAO
 {
     public interface IOrderDao
     {
-        IList<Order> GetOrdersOnStatus(Guid orderStatusID);
+        IList<Order> GetOrders(string username = null);
 
-        bool UpdateOrderStatus(Guid orderID, Guid orderStatusID);
+        bool UpdateOrderStatus(Guid orderID, string orderStatus);
 
         bool CreateOrder(Order order);
 
@@ -94,7 +94,7 @@ namespace FDDWeb.DAO
                             var orderID = reader.GetFieldValue<Guid>("ID");
                             var menuItem = Tuple.Create(new MenuItem
                             {
-                                Name = reader.GetFieldValue<string>("NAME"),
+                                Name = reader.GetFieldValue<string>("MENU_NAME"),
                                 Price = reader.GetFieldValue<decimal>("PRICE"),
                                 MenuID = reader.GetFieldValue<Guid>("MENU_ID")
                             }, reader.GetFieldValue<int>("QUANTITY"));
@@ -112,10 +112,11 @@ namespace FDDWeb.DAO
                                     ID = reader.GetFieldValue<Guid>("ID"),
                                     OrderStatus = reader.GetFieldValue<string>("STATUS"),
                                     OrderStatusID = reader.GetFieldValue<Guid>("ORDER_STATUS_ID"),
+                                    OrderDate = reader.GetFieldValue<DateTime>("CREATEDDATE"),
                                     User = new User
                                     {
                                         UserID = reader.GetFieldValue<Guid>("USER_ID"),
-                                        Name = reader.GetFieldValue<string>("NAME"),
+                                        Name = reader.GetFieldValue<string>("USER_NAME"),
                                         Username = username
                                     }
                                 };
@@ -129,14 +130,16 @@ namespace FDDWeb.DAO
             }
         }
 
-        public IList<Order> GetOrdersOnStatus(Guid orderStatusID)
+        public IList<Order> GetOrders(string username = null)
         {
             string constr = ConfigurationManager.ConnectionStrings["FDDConnection"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
-                using (SqlCommand cmd = new SqlCommand("GET_ORDER_ON_STATUS"))
+                using (SqlCommand cmd = new SqlCommand(string.IsNullOrEmpty(username) ? "GET_ALL_CURRENT_ORDERS" : "GET_USER_ORDERS"))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
+                    if (!string.IsNullOrEmpty(username))
+                        cmd.Parameters.AddWithValue("@Username", username);
 
                     cmd.Connection = con;
                     con.Open();
@@ -145,28 +148,38 @@ namespace FDDWeb.DAO
                         IList<Order> orders = new List<Order>();
                         while (reader.Read())
                         {
-
-                            orders.Add(new Order
+                            var orderID = reader.GetFieldValue<Guid>("ID");
+                            var menuItem = Tuple.Create(new MenuItem
                             {
+                                Name = reader.GetFieldValue<string>("MENU_NAME"),
+                                Price = reader.GetFieldValue<decimal>("PRICE"),
+                                MenuID = reader.GetFieldValue<Guid>("MENU_ID")
+                            }, reader.GetFieldValue<int>("QUANTITY"));
 
-                                ID = reader.GetFieldValue<Guid>("ID"),
-                                MenuItem = Tuple.Create(new MenuItem
+                            var order = orders.FirstOrDefault(o => o.ID == orderID);
+                            if (order != null)
+                            {
+                                order.UserMenuItems.Add(menuItem);
+                            }
+                            else
+                            {
+                                order = new Order
                                 {
-                                    FoodCategory = reader.GetFieldValue<string>("CATEGORY"),
-                                    FoodCategoryID = reader.GetFieldValue<Guid>("FOOD_CATEGORY_ID"),
-                                    Name = reader.GetFieldValue<string>("NAME"),
-                                    Price = reader.GetFieldValue<decimal>("PRICE"),
-                                    MenuID = reader.GetFieldValue<Guid>("MENU_ID")
-                                },
-                                            reader.GetFieldValue<int>("QUANTITY")),
-                                OrderStatus = reader.GetFieldValue<string>("STATUS"),
-                                OrderStatusID = reader.GetFieldValue<Guid>("ORDER_STATUS_ID"),
-                                User = new User
-                                {
-                                    UserID = reader.GetFieldValue<Guid>("USER_ID"),
-                                    Name = reader.GetFieldValue<string>("NAME")
-                                }
-                            });
+
+                                    ID = reader.GetFieldValue<Guid>("ID"),
+                                    OrderStatus = reader.GetFieldValue<string>("STATUS"),
+                                    OrderStatusID = reader.GetFieldValue<Guid>("ORDER_STATUS_ID"),
+                                    OrderDate = reader.GetFieldValue<DateTime>("CREATEDDATE"),
+                                    User = new User
+                                    {
+                                        UserID = reader.GetFieldValue<Guid>("USER_ID"),
+                                        Name = reader.GetFieldValue<string>("USER_NAME"),
+                                        Username = username
+                                    }
+                                };
+                                order.UserMenuItems.Add(menuItem);
+                                orders.Add(order);
+                            }
                         }
                         return orders;
                     }
@@ -192,16 +205,16 @@ namespace FDDWeb.DAO
             }
         }
 
-        public bool UpdateOrderStatus(Guid orderID, Guid orderStatusID)
+        public bool UpdateOrderStatus(Guid orderID, string orderStatus)
         {
             string constr = ConfigurationManager.ConnectionStrings["FDDConnection"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
-                using (SqlCommand cmd = new SqlCommand("PLACE_ORDER"))
+                using (SqlCommand cmd = new SqlCommand("UPDATE_ORDER_STATUS"))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@OrderID", orderID);
-                    cmd.Parameters.AddWithValue("@OrderStatusID", orderStatusID);
+                    cmd.Parameters.AddWithValue("@OrderStatus", orderStatus);
                     cmd.Connection = con;
                     con.Open();
                     var result = cmd.ExecuteNonQuery();

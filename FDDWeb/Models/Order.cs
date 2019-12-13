@@ -12,5 +12,6 @@ namespace FDDWeb.Models
         public string OrderStatus { get; set; }
         public Guid OrderStatusID { get; set; }
         public decimal TotalPrice { get; internal set; }
+        public DateTime OrderDate { get; set; }
     }
 }

@@ -10,7 +10,7 @@
 namespace FDDWeb.Customer {
     
     
-    public partial class ManageOrder {
+    public partial class OrderHistory {
         
         /// <summary>
         /// ErrorMessage control.

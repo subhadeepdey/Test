@@ -51,6 +51,12 @@ GO
 DROP PROCEDURE [GET_CURRENT_CART_ORDER]
 GO
 
+DROP PROCEDURE [GET_USER_ORDERS]
+GO
+
+DROP PROCEDURE [GET_ALL_CURRENT_ORDERS]
+GO
+
 DROP PROCEDURE [INSERT_USER]
 GO
 
@@ -359,11 +365,12 @@ BEGIN
 			 , os.[STATUS]
 			 , o.[QUANTITY]
 			 , o.[USER_ID]
-			 , m.[NAME]
+			 , o.CREATEDDATE
+			 , m.[NAME] AS [MENU_NAME]
 			 , m.PRICE
 			 , m.FOOD_CATEGORY_ID
 			 , fc.CATEGORY
-			 , u.[NAME]
+			 , u.[NAME] AS [USER_NAME]
 			 , u.[ADDRESS]
 			 , u.ALTERNATE_ADDRESS
 		FROM [ORDER] o
@@ -390,11 +397,12 @@ BEGIN
 			 , os.[STATUS]
 			 , o.[QUANTITY]
 			 , o.[USER_ID]
-			 , m.[NAME]
+			 , o.CREATEDDATE
+			 , m.[NAME] AS [MENU_NAME]
 			 , m.PRICE
 			 , m.FOOD_CATEGORY_ID
 			 , fc.CATEGORY
-			 , u.[NAME]
+			 , u.[NAME] AS [USER_NAME]
 			 , u.[ADDRESS]
 			 , u.ALTERNATE_ADDRESS
 		FROM [ORDER] o
@@ -408,6 +416,68 @@ BEGIN
 			ON o.[USER_ID] = u.[ID]
 			WHERE u.[USERNAME] = @Username
 			AND os.[STATUS] = 'ADDED_TO_CART'
+
+END
+GO
+CREATE PROCEDURE [GET_USER_ORDERS]
+	@Username NVARCHAR(100)
+AS
+BEGIN
+		SELECT o.ID
+			 , o.MENU_ID
+			 , o.[ORDER_STATUS_ID]
+			 , os.[STATUS]
+			 , o.[QUANTITY]
+			 , o.[USER_ID]
+			 , o.CREATEDDATE
+			 , m.[NAME] AS [MENU_NAME]
+			 , m.PRICE
+			 , m.FOOD_CATEGORY_ID
+			 , fc.CATEGORY
+			 , u.[NAME] AS [USER_NAME]
+			 , u.[ADDRESS]
+			 , u.ALTERNATE_ADDRESS
+		FROM [ORDER] o
+		INNER JOIN[MENU] m
+			ON o.MENU_ID = m.ID 
+		INNER JOIN [FOOD_CATEGORY] fc
+			ON m.FOOD_CATEGORY_ID= fc.ID
+		INNER JOIN [ORDER_STATUS] os
+			ON os.ID = o.ORDER_STATUS_ID
+		INNER JOIN [USER] u
+			ON o.[USER_ID] = u.[ID]
+			WHERE u.[USERNAME] = @Username
+			AND os.[STATUS] <> 'ADDED_TO_CART'
+
+END
+GO
+CREATE PROCEDURE [GET_ALL_CURRENT_ORDERS]
+AS
+BEGIN
+		SELECT o.ID
+			 , o.MENU_ID
+			 , o.[ORDER_STATUS_ID]
+			 , os.[STATUS]
+			 , o.[QUANTITY]
+			 , o.[USER_ID]
+			 , o.CREATEDDATE
+			 , m.[NAME] AS [MENU_NAME]
+			 , m.PRICE
+			 , m.FOOD_CATEGORY_ID
+			 , fc.CATEGORY
+			 , u.[NAME] AS [USER_NAME]
+			 , u.[ADDRESS]
+			 , u.ALTERNATE_ADDRESS
+		FROM [ORDER] o
+		INNER JOIN[MENU] m
+			ON o.MENU_ID = m.ID 
+		INNER JOIN [FOOD_CATEGORY] fc
+			ON m.FOOD_CATEGORY_ID= fc.ID
+		INNER JOIN [ORDER_STATUS] os
+			ON os.ID = o.ORDER_STATUS_ID
+		INNER JOIN [USER] u
+			ON o.[USER_ID] = u.[ID]
+			WHERE os.[STATUS] <> 'ADDED_TO_CART'
 
 END
 GO
