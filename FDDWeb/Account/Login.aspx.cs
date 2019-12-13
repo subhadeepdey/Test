@@ -8,10 +8,11 @@ using FDDWeb.Models;
 using FDDWeb.BLL;
 using Microsoft.Practices.Unity;
 using System.Web.Security;
+using FDDWeb.Utility;
 
 namespace FDDWeb.Account
 {
-    public partial class Login : Page
+    public partial class Login : PageBase
     {
         [Dependency]
         public IUserLogic userLogic { get; set; }

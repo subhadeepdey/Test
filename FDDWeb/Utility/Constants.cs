@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace FDDWeb.Utility
+﻿namespace FDDWeb.Utility
 {
     public static class Constants
     {

@@ -1,15 +1,13 @@
 ﻿using FDDWeb.BLL;
+using FDDWeb.Utility;
 using Microsoft.Practices.Unity;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace FDDWeb
 {
-    public partial class Menu : System.Web.UI.Page
+    public partial class Menu : PageBase
     {
         [Dependency]
         public MenuLogic menuLogic { get; set; }
@@ -19,11 +17,26 @@ namespace FDDWeb
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if (!IsPostBack)
             {
                 // Load menu Items.
                 LoadMenu(null);
                 LoadCategory();
+                LoadCart();
+            }
+        }
+
+        protected void PlaceOrder(object sender, EventArgs e)
+        {
+            if (orderLogic.PlaceOrder(USERNAME))
+            {
+                SuccessMessage.Text = "Order Placed Successfully.";
+                LoadCart();
+            }
+            else
+            {
+                ErrorMessage.Text = "Error occurred.";
             }
         }
 
@@ -35,24 +48,21 @@ namespace FDDWeb
             }
         }
 
-        private void LoadMenu(Guid? foodCategoryID)
+        protected void AddMenuToCart(object sender, System.Web.UI.WebControls.CommandEventArgs e)
         {
-            // Load Menu
-            MenuList.DataSource = foodCategoryID.HasValue ? menuLogic.GetMenu() : menuLogic.GetMenu();
-            MenuList.DataBind();
-        }
-
-        protected void AddMenu(object sender, System.Web.UI.WebControls.CommandEventArgs e)
-        {
-            if (HttpContext.Current.User != null)
+            if (!string.IsNullOrEmpty(USERNAME))
             {
                 RepeaterItem item = (sender as Button).NamingContainer as RepeaterItem;
 
-                Int32.TryParse((item.FindControl("Quantity") as TextBox).Text, out int quantity);
+                if (!Int32.TryParse((item.FindControl("Quantity") as TextBox).Text, out int quantity))
+                {
+                    ErrorMessage.Text = "Please select quantity.";
+                    return;
+                }
 
-                orderLogic.AddMenuToOrder(new Guid(e.CommandArgument.ToString()), quantity);
+                orderLogic.AddMenuToOrder(USERNAME, new Guid(e.CommandArgument.ToString()), quantity);
 
-                LoadMenu(null);
+                LoadCart();
             }
             else
             {
@@ -60,12 +70,46 @@ namespace FDDWeb
             }
         }
 
+        private void LoadMenu(Guid? foodCategoryID)
+        {
+            // Load Menu
+            MenuList.DataSource = menuLogic.GetMenu(foodCategoryID);
+            MenuList.DataBind();
+        }
+
         private void LoadCategory()
         {
             // Load Category
             Category.DataSource = menuLogic.GetFoodCategories();
-            Category.DataBind();
             Category.SelectedIndex = -1;
+            Category.DataBind();
+        }
+
+        private void LoadCart()
+        {
+            if (!string.IsNullOrEmpty(USERNAME))
+            {
+                var orders = orderLogic.GetCurrentOrder(USERNAME);
+                if (!orders.Any())
+                {
+                    CartDetail.Visible = false; return;
+                }
+                CartDetail.Visible = true;
+                CartDetail.DataSource = orders.First().UserMenuItems;
+                CartDetail.DataBind();
+            }
+        }
+
+        protected void CartDetailItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                var menu = (Tuple<FDDWeb.Models.MenuItem, int>)e.Item.DataItem;
+
+                ((Label)e.Item.FindControl("Item")).Text = ((FDDWeb.Models.MenuItem)menu.Item1).Name;
+                ((Label)e.Item.FindControl("Quantity")).Text = menu.Item2.ToString();
+                ((Label)e.Item.FindControl("Price")).Text = ((FDDWeb.Models.MenuItem)menu.Item1).Price.ToString();
+            }
         }
     }
 }

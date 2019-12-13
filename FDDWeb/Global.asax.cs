@@ -18,6 +18,19 @@ namespace FDDWeb
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
 
+        void Application_Error(object sender, EventArgs e)
+        {
+            Exception ex = Server.GetLastError();
+
+            if (ex is HttpUnhandledException)
+            {
+                var logger = NLog.LogManager.GetCurrentClassLogger();
+                logger.Error(ex);
+
+                // Pass the error on to the error page.
+                // Server.Transfer("ErrorPage.aspx?handler=Application_Error%20-%20Global.asax", true);
+            }
+        }
         protected void Application_PostAuthenticateRequest(Object sender, EventArgs e)
         {
             var authCookie = HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];

@@ -7,18 +7,20 @@ using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Microsoft.AspNet.Identity;
-
+using FDDWeb.Utility;
 namespace FDDWeb
 {
     public partial class SiteMaster : MasterPage
     {
+        public bool IsAdmin;
         private const string AntiXsrfTokenKey = "__AntiXsrfToken";
         private const string AntiXsrfUserNameKey = "__AntiXsrfUserName";
         private string _antiXsrfTokenValue;
 
         protected void Page_Init(object sender, EventArgs e)
         {
-            var aa = Context.User.Identity;
+            IsAdmin = Context.User.IsInRole(Utility.Constants.ADMIN_ROLE);
+
             // The code below helps to protect against XSRF attacks
             var requestCookie = Request.Cookies[AntiXsrfTokenKey];
             Guid requestCookieGuidValue;
@@ -78,5 +80,4 @@ namespace FDDWeb
             Context.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
         }
     }
-
 }

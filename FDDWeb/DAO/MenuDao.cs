@@ -1,5 +1,6 @@
 ﻿using FDDWeb.Models;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -113,7 +114,7 @@ namespace FDDWeb.DAO
                                 Category = reader.GetFieldValue<string>("CATEGORY"),
                             });
                         }
-                        return foodCategories;
+                        return foodCategories.OrderBy(f => f.Category).ToList();
                     }
                 }
             }
@@ -151,6 +152,5 @@ namespace FDDWeb.DAO
                 }
             }
         }
-
     }
 }

@@ -9,7 +9,7 @@ using System.Web;
 
 namespace FDDWeb.Account
 {
-    public partial class Register : Page
+    public partial class Register : PageBase
     {
         [Dependency]
         public IUserLogic userLogic { get; set; }

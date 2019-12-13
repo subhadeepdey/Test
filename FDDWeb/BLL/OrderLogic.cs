@@ -8,7 +8,10 @@ namespace FDDWeb.BLL
 {
     public interface IOrderLogic
     {
-        bool AddMenuToOrder(Guid menuID, int quantity);
+        bool AddMenuToOrder(string username, Guid menuID, int quantity);
+
+        bool PlaceOrder(string username);
+        IList<Order> GetCurrentOrder(string username);
     }
 
     public class OrderLogic : IOrderLogic
@@ -19,9 +22,11 @@ namespace FDDWeb.BLL
         {
             this.orderDao = orderDao;
         }
-        public bool AddMenuToOrder(Guid menuID, int quantity)
-        {
-            return orderDao.AddMenuToOrder(HttpContext.Current.User.Identity.Name, menuID, quantity);
-        }
+        public bool AddMenuToOrder(string username, Guid menuID, int quantity) => orderDao.AddMenuToOrder(username, menuID, quantity);
+
+        public bool PlaceOrder(string username) => orderDao.PlaceOrder(username);
+
+        public IList<Order> GetCurrentOrder(string username) => orderDao.GetCurrentOrder(username);
+
     }
 }

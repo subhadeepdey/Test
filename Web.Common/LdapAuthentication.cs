@@ -63,7 +63,7 @@ namespace Web.Common
 
                 _filterAttribute = (String)result.Properties["cn"][0];
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }

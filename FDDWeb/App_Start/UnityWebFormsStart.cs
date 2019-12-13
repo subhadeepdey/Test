@@ -21,7 +21,7 @@ namespace FDDWeb.App_Start
         internal static void PostStart()
         {
             IUnityContainer container = new UnityContainer();
-            
+
             HttpContext.Current.Application.SetContainer(container);
 
             RegisterDependencies(container);
@@ -33,6 +33,8 @@ namespace FDDWeb.App_Start
         /// <param name="container">Instance of the container to populate.</param>
         private static void RegisterDependencies(IUnityContainer container)
         {
+            container.RegisterInstance<NLog.ILogger>(NLog.LogManager.GetCurrentClassLogger());
+
             // TODO: Add any dependencies needed here
             container.RegisterTypes(
               AllClasses.FromAssemblies(typeof(Startup).Assembly),

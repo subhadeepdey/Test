@@ -3,6 +3,61 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <h2><%: Title %>.</h2>
     <hr />
+    <p class="text-success">
+        <asp:Literal runat="server" ID="SuccessMessage" />
+    </p>
+
+    <asp:Repeater ID="CartDetail" runat="server" Visible="<%# !string.IsNullOrEmpty(USERNAME)%>" OnItemDataBound="CartDetailItemDataBound">
+        <HeaderTemplate>
+            <table class="col-md-12 table-hover">
+                <thead class="thead-light">
+                    <tr>
+                        <th colspan="3">
+                            <asp:Label runat="server" CssClass="col-md-2">Orders in your cart:</asp:Label>
+                            <hr />
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <asp:Label runat="server" CssClass="col-md-2">Item</asp:Label>
+                        </th>
+                        <th>
+                            <asp:Label runat="server" CssClass="col-md-2">Quantity</asp:Label>
+                        </th>
+                        <th>
+                            <asp:Label runat="server" CssClass="col-md-1">Price</asp:Label>
+                        </th>
+                    </tr>
+                </thead>
+        </HeaderTemplate>
+        <ItemTemplate>
+            <tr>
+                <td class="table-column">
+                    <asp:Label runat="server" CssClass="control-label" ID="Item"></asp:Label>
+                </td>
+                <td class="table-column">
+                    <asp:Label runat="server" CssClass="control-label" ID="Quantity"></asp:Label>
+                </td>
+                <td class="table-column">
+                    <asp:Label runat="server" CssClass="control-label" ID="Price"></asp:Label>
+                </td>
+            </tr>
+        </ItemTemplate>
+        <FooterTemplate>
+            <tr>
+                <td colspan="3">
+                    <hr />
+                    <asp:Button runat="server" Text="Place Order" OnClick="PlaceOrder" />
+                    <hr />
+                </td>
+            </tr>
+            </table>
+       
+        </FooterTemplate>
+    </asp:Repeater>
+    <p class="text-danger">
+        <asp:Literal runat="server" ID="ErrorMessage" />
+    </p>
     <div class="row">
         <div class="form-group">
             <div class="col-md-2">
@@ -11,29 +66,30 @@
             <div class="col-md-2">
                 <asp:DropDownList runat="server" ID="Category" AutoPostBack="true" OnSelectedIndexChanged="CategorySelected" CssClass="form-control" DataTextField="Category" DataValueField="ID"></asp:DropDownList>
             </div>
-
         </div>
+
         <div class="col-md-12 row">
             <hr />
             <asp:Repeater ID="MenuList" runat="server">
                 <HeaderTemplate>
-                    <table class="table-hovered" style="width: 100%">
+                    <table class="col-md-12 table-hover" style="width: 100%">
                         <thead class="thead-light">
                             <tr>
-                                <th>
-                                    <asp:Label runat="server" CssClass="col-md-4">Category</asp:Label>
+                                <th class="col-md-2">
+                                    <asp:Label runat="server">Category</asp:Label>
                                 </th>
-                                <th>
-                                    <asp:Label runat="server" CssClass="col-md-2">Name</asp:Label>
+                                <th class="col-md-2">
+                                    <asp:Label runat="server">Name</asp:Label>
                                 </th>
-                                <th>
-                                    <asp:Label runat="server" CssClass="col-md-4">Description</asp:Label>
+                                <th class="col-md-4">
+                                    <asp:Label runat="server">Description</asp:Label>
                                 </th>
-                                <th>
-                                    <asp:Label runat="server" CssClass="col-md-2">Price</asp:Label>
+                                <th class="col-md-2">
+                                    <asp:Label runat="server">Price</asp:Label>
                                 </th>
-                                <th>
-                                    <asp:Label runat="server" CssClass="col-md-2">Add to Cart</asp:Label>
+                                <th class="col-md-2">Quantity
+                                </th>
+                                <th class="col-md-2">&nbsp;
                                 </th>
                             </tr>
                         </thead>
@@ -43,7 +99,6 @@
                         <tr>
                             <td class="table-column">
                                 <asp:Label runat="server" CssClass="control-label"><%#Eval("FoodCategory") %></asp:Label>
-
                             </td>
 
                             <td class="table-column">
@@ -59,16 +114,18 @@
 
                             </td>
                             <td class="table-column">
-                                <asp:TextBox ID="Quantity" runat="server" TextMode="Number" ValidationGroup='<%#Eval("MenuID") %>'></asp:TextBox>
-                                <asp:RequiredFieldValidator runat="server" ControlToValidate="Quantity" ValidationGroup='<%#Eval("MenuID") %>'
-                                    CssClass="text-danger" ErrorMessage="The quantity field is required." />
-                                <asp:Button runat="server" Text="Add" OnCommand="AddMenu" CausesValidation="false" ValidationGroup='<%#Eval("MenuID") %>' CommandArgument='<%#Eval("MenuID") %>' />
+                                <asp:TextBox ID="Quantity" runat="server" TextMode="Number" Width="50px"></asp:TextBox>
+                              
+                            </td>
+                            <td class="table-column">
+                                <asp:Button runat="server" Text="Add To Cart" OnCommand="AddMenuToCart" CausesValidation="false" CommandArgument='<%#Eval("MenuID") %>' />
                             </td>
                         </tr>
                     </tbody>
                 </ItemTemplate>
                 <FooterTemplate>
                     </table>
+               
                 </FooterTemplate>
             </asp:Repeater>
         </div>

@@ -1,11 +1,12 @@
 ﻿using FDDWeb.BLL;
 using FDDWeb.Models;
+using FDDWeb.Utility;
 using Microsoft.Practices.Unity;
 using System;
 
 namespace FDDWeb.Admin
 {
-    public partial class ManageMenu : System.Web.UI.Page
+    public partial class ManageMenu : PageBase
     {
         [Dependency]
         public MenuLogic menuLogic { get; set; }
@@ -32,6 +33,7 @@ namespace FDDWeb.Admin
             });
 
             LoadMenu();
+            Reset();
         }
 
         protected void DeleteMenu(object sender, System.Web.UI.WebControls.CommandEventArgs e)
@@ -43,10 +45,7 @@ namespace FDDWeb.Admin
 
         protected void Reset(object sender, EventArgs e)
         {
-            Category.SelectedIndex = -1;
-            Name.Text = string.Empty;
-            Description.Text = string.Empty;
-            Price.Text = string.Empty;
+            Reset();
         }
 
         private void LoadCategory()
@@ -61,6 +60,14 @@ namespace FDDWeb.Admin
             // Load Menu
             Menu.DataSource = menuLogic.GetMenu();
             Menu.DataBind();
+        }
+
+        private void Reset()
+        {
+            Category.SelectedIndex = -1;
+            Name.Text = string.Empty;
+            Description.Text = string.Empty;
+            Price.Text = string.Empty;
         }
     }
 }
