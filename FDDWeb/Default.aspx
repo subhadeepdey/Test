@@ -4,7 +4,7 @@
 
     <div class="jumbotron">
         <h1>FDD</h1>
-        <p>Fun for your pay</p>
+        <p>Enjoy on what you are paying.</p>
     </div>
 
     <div class="row">

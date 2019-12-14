@@ -61,7 +61,7 @@ namespace FDDWeb.DAO
             string constr = ConfigurationManager.ConnectionStrings["FDDConnection"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
-                using (SqlCommand cmd = new SqlCommand("Validate_User"))
+                using (SqlCommand cmd = new SqlCommand("VALIDATE_USER"))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@Username", username);
@@ -73,18 +73,22 @@ namespace FDDWeb.DAO
                     {
                         if (reader.Read())
                         {
-                            user = new User
+                            var status = (LoginStatus)reader.GetFieldValue<int>("STATUS");
+                            if (status.Equals(LoginStatus.Success))
                             {
-                                UserID = reader.GetFieldValue<Guid>("ID"),
-                                Username = reader.GetFieldValue<string>("USERNAME"),
-                                Status = (LoginStatus)reader.GetFieldValue<int>("STATUS"),
-                                Name = reader.GetFieldValue<string>("NAME"),
-                                Phone = reader.GetFieldValue<string>("PHONE"),
-                                Email = reader.GetFieldValue<string>("EMAIL"),
-                                Address = reader.GetFieldValue<string>("ADDRESS"),
-                                AlternateAddress = reader.GetFieldValue<string>("ALTERNATE_ADDRESS"),
-                                Role = reader.GetFieldValue<string>("ROLE")
-                            };
+                                user = new User
+                                {
+                                    UserID = reader.GetFieldValue<Guid>("ID"),
+                                    Username = reader.GetFieldValue<string>("USERNAME"),
+                                    Status = LoginStatus.Success,
+                                    Name = reader.GetFieldValue<string>("NAME"),
+                                    Phone = reader.GetFieldValue<string>("PHONE"),
+                                    Email = reader.GetFieldValue<string>("EMAIL"),
+                                    Address = reader.GetFieldValue<string>("ADDRESS"),
+                                    AlternateAddress = reader.GetFieldValue<string>("ALTERNATE_ADDRESS"),
+                                    Role = reader.GetFieldValue<string>("ROLE")
+                                };
+                            }
                         }
                         return user;
                     }
