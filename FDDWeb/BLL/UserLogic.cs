@@ -15,7 +15,6 @@ namespace FDDWeb.BLL
         User IsValidUser(string username, string password);
         IList<User> GetUsers();
         bool UpgradeToPremium(string username);
-        bool UpdateUserRole(string username, string role);
     }
     public class UserLogic : IUserLogic
     {
@@ -37,7 +36,5 @@ namespace FDDWeb.BLL
         }
 
         public bool UpgradeToPremium(string username) => userDao.UpgradeToPremium(username);
-
-        public bool UpdateUserRole(string username, string role) => userDao.UpdateUserRole(username, role);
     }
 }

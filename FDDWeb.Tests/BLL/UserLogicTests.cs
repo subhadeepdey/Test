@@ -7,7 +7,7 @@ using Moq;
 namespace FDDWeb.BLL.Tests
 {
     [TestClass()]
-    public class UserLogicTests:TestBase
+    public class UserLogicTests : TestBase
     {
         public IUserLogic userLogic { get; set; }
 
@@ -36,6 +36,27 @@ namespace FDDWeb.BLL.Tests
             });
             Assert.IsNotNull(user);
             Assert.AreEqual(user.Username, "test");
+        }
+
+        [TestMethod()]
+        public void IsValidUserTest()
+        {
+            var user = userLogic.IsValidUser("Admin", "password");
+            Assert.IsNotNull(user);
+            Assert.AreEqual(user.Username, "Admin");
+        }
+
+        [TestMethod()]
+        public void GetUsersTest()
+        {
+            var users = userLogic.GetUsers();
+            Assert.AreNotEqual(users.Count, 0);
+        }
+
+        [TestMethod()]
+        public void UpgradeToPremiumTest()
+        {
+            Assert.IsTrue(userLogic.UpgradeToPremium("Customer"));
         }
     }
 }
