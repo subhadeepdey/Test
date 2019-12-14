@@ -18,6 +18,7 @@ namespace FDDWeb.BLL
         IList<Order> GetOrders(string username = null);
 
         bool UpdateOrderStatus(Guid orderID, string orderStatus);
+
         bool CanOrderStatusChange(string orderStatus);
     }
 

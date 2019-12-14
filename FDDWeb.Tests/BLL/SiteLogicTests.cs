@@ -26,7 +26,17 @@ namespace FDDWeb.BLL.Tests
         [TestMethod()]
         public void GetSiteDataTest()
         {
-            Assert.IsNotNull(siteLogic.GetSiteData());
+            var siteData = siteLogic.GetSiteData();
+            Assert.IsNotNull(siteData);
+            Assert.AreNotEqual(siteData.Count, 0);
+        }
+
+        [TestMethod()]
+        public void UpdateSiteDataTest()
+        {
+            var retVal = siteLogic.UpdateSiteData("1", "2", "3");
+            Assert.IsTrue(retVal);
+
         }
     }
 }
