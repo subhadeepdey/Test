@@ -10,7 +10,7 @@ using FDDWeb.DAO;
 namespace FDDWeb.BLL.Tests
 {
     [TestClass()]
-    public class SiteLogicTests
+    public class SiteLogicTests : TestBase
     {
         public ISiteLogic siteLogic { get; set; }
 

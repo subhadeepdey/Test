@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\SiteLogicTests.cs" />
+    <Compile Include="BLL\TestBase.cs" />
     <Compile Include="BLL\UserLogicTests.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -85,13 +86,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="FDD.mdf">
+    <Content Include="App_Data\FDD.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="FDD_log.ldf">
+    <Content Include="App_Data\FDD_log.ldf">
       <DependentUpon>FDD.mdf</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="SQL\FDD_TEST.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
