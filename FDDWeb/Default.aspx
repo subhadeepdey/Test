@@ -2,25 +2,24 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div class="jumbotron">Test
-        <h1>ASP.NET</h1>
-        <p>Fun</p>
+    <div class="jumbotron">
+        <h1>FDD</h1>
+        <p>Fun for your pay</p>
     </div>
 
     <div class="row">
         <div class="col-md-4">
-            <h2>Getting started</h2>
-            <p>Content 1</p>
-            </div>
-        <div class="col-md-4">
-            <h2>Get more libraries</h2>
-           <p>Content 2</p>
+            <h3>Offer!!!<asp:Label ID="PublishingOffer" runat="server"></asp:Label></h3>
+            
         </div>
         <div class="col-md-4">
-            <h2>Web Hosting</h2>
-            <p>Content 3
-            </p>
+            <h3>Best Indian food online. Promise on quality by
+                <asp:Label ID="DeliveryTime" runat="server"></asp:Label></h3>
+        </div>
+        <div class="col-md-4">
+            <h3>Menu of the Day</h3>
+            <h4>Try our best and specil menu today<asp:Label ID="MenuOfTheDay" runat="server"></asp:Label></h4>
+
         </div>
     </div>
-
 </asp:Content>

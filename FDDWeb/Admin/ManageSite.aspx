@@ -52,5 +52,31 @@
                 </FooterTemplate>
             </asp:Repeater>
         </div>
+
+
+        <div class="form-group">
+            <asp:Label runat="server" AssociatedControlID="Address" CssClass="col-md-2 control-label">Publishing offer</asp:Label>
+            <div class="col-md-10">
+                <asp:TextBox runat="server" ID="PublishingOffer" CssClass="form-control" TextMode="MultiLine" />
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="PublishingOffer"
+                    CssClass="text-danger" ErrorMessage="The publishing ffer field is required." />
+            </div>
+        </div>
+        <div class="form-group">
+            <asp:Label runat="server" AssociatedControlID="MenuOfTheDay" CssClass="col-md-2 control-label">Menu of the Day</asp:Label>
+            <div class="col-md-10">
+                <asp:TextBox runat="server" ID="MenuOfTheDay" CssClass="form-control" TextMode="SingleLine" />
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="MenuOfTheDay"
+                    CssClass="text-danger" ErrorMessage="The Menu of the Day field is required." />
+            </div>
+        </div>
+        <div class="form-group">
+            <asp:Label runat="server" AssociatedControlID="MenuOfTheDay" CssClass="col-md-2 control-label">Delivery time</asp:Label>
+            <div class="col-md-10">
+                <asp:TextBox runat="server" ID="DeliveryTime" CssClass="form-control" TextMode="SingleLine" />
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="DeliveryTime"
+                    CssClass="text-danger" ErrorMessage="The Delivery time field is required." />
+            </div>
+        </div>
     </div>
 </asp:Content>

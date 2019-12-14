@@ -760,6 +760,8 @@ GO
  GO
  INSERT_USER 'Admin', '5F4DCC3B5AA765D61D8327DEB882CF99','Admin User1', 'admin1@FDD.com', '888-888-8882','Test Address 2',' Alternate Test Address 2', 'Admin'
  GO
+ INSERT INTO [FDD_SITE] ([FDD_KEY], [FDD_VALUE]) VALUES ('DELIVERY_TIME', '2 Hour'),('PUBLISHING_OFFER', 'Great offer!!! Get one entry free with one.'), ('MENU_OF_THE_DAY', 'Crispy Momo with sesame sause.')
+ 
  SELECT * FROM [USER]
  GO
  SELECT * FROM FOOD_CATEGORY

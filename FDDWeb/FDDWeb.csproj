@@ -328,6 +328,7 @@
     <Compile Include="App_Start\UnityWebFormsStart.cs" />
     <Compile Include="BLL\OrderLogic.cs" />
     <Compile Include="BLL\MenuLogic.cs" />
+    <Compile Include="BLL\SiteLogic.cs" />
     <Compile Include="BLL\UserLogic.cs" />
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
@@ -345,6 +346,7 @@
     </Compile>
     <Compile Include="DAO\MenuDao.cs" />
     <Compile Include="DAO\OrderDao.cs" />
+    <Compile Include="DAO\SiteDao.cs" />
     <Compile Include="DAO\UserDao.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
