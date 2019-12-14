@@ -85,9 +85,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="FDD.mdf" />
+    <Content Include="FDD.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="FDD_log.ldf">
       <DependentUpon>FDD.mdf</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
