@@ -18,7 +18,7 @@
         </div>
         <div class="col-md-4">
             <h3>Menu of the Day</h3>
-            <h4>Try our best and specil menu today<asp:Label ID="MenuOfTheDay" runat="server"></asp:Label></h4>
+            <h4>Try our best and special menu today<asp:Label ID="MenuOfTheDay" runat="server"></asp:Label></h4>
 
         </div>
     </div>

@@ -61,7 +61,7 @@
                                     <asp:Label runat="server" CssClass="col-md-4">Description</asp:Label>
                                 </th>
                                 <th>
-                                    <asp:Label runat="server" CssClass="col-md-1">Price</asp:Label>
+                                    <asp:Label runat="server" CssClass="col-md-1">Price($)</asp:Label>
                                 </th>
                                 <th>
                                     <asp:Label runat="server" CssClass="col-md-1">Remove</asp:Label>
@@ -86,7 +86,7 @@
 
                             </td>
                             <td class="table-column">
-                                <asp:Label runat="server" CssClass="control-label"><%#Eval("Price") %></asp:Label>
+                                <asp:Label runat="server" CssClass="control-label"><%# String.Format("{0:C}",Eval("Price")) %></asp:Label>
 
                             </td>
                             <td class="table-column">

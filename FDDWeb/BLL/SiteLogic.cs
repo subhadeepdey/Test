@@ -6,6 +6,7 @@ namespace FDDWeb.BLL
     public interface ISiteLogic
     {
         Dictionary<string, string> GetSiteData();
+        bool UpdateSiteData(string publishingOffer, string deliveryTime, string menuOfTheDay);
     }
     public class SiteLogic : ISiteLogic
     {
@@ -17,5 +18,7 @@ namespace FDDWeb.BLL
         }
 
         public Dictionary<string, string> GetSiteData() => siteDao.GetSiteData();
+
+        public bool UpdateSiteData(string publishingOffer, string deliveryTime, string menuOfTheDay) => siteDao.UpdateSiteData(publishingOffer, deliveryTime, menuOfTheDay);
     }
 }

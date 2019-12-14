@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Admin" MasterPageFile="~/Site.Master" Language="C#" AutoEventWireup="true" CodeBehind="ManageSite.aspx.cs" Inherits="FDDWeb.Admin.ManageSite" %>
+﻿<%@ Page Title="Manage Site" Language="C#" AutoEventWireup="true" CodeBehind="ManageSite.aspx.cs" Inherits="FDDWeb.Admin.ManageSite"  MasterPageFile="~/Site.Master"  Async="true"%>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
     <h2><%: Title %>.</h2>
@@ -55,7 +55,7 @@
 
 
         <div class="form-group">
-            <asp:Label runat="server" AssociatedControlID="Address" CssClass="col-md-2 control-label">Publishing offer</asp:Label>
+            <asp:Label runat="server" AssociatedControlID="PublishingOffer" CssClass="col-md-2 control-label">Publishing offer</asp:Label>
             <div class="col-md-10">
                 <asp:TextBox runat="server" ID="PublishingOffer" CssClass="form-control" TextMode="MultiLine" />
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="PublishingOffer"
@@ -71,11 +71,16 @@
             </div>
         </div>
         <div class="form-group">
-            <asp:Label runat="server" AssociatedControlID="MenuOfTheDay" CssClass="col-md-2 control-label">Delivery time</asp:Label>
+            <asp:Label runat="server" AssociatedControlID="DeliveryTime" CssClass="col-md-2 control-label">Delivery time</asp:Label>
             <div class="col-md-10">
                 <asp:TextBox runat="server" ID="DeliveryTime" CssClass="form-control" TextMode="SingleLine" />
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="DeliveryTime"
                     CssClass="text-danger" ErrorMessage="The Delivery time field is required." />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <asp:Button runat="server" OnClick="UpdateSiteData" Text="Update" CssClass="btn btn-default" />
             </div>
         </div>
     </div>

@@ -29,7 +29,6 @@ namespace FDDWeb.Admin
             Users.DataBind();
         }
 
-
         private void LoadSiteData()
         {
             var siteData = siteLogic.GetSiteData();
@@ -53,6 +52,12 @@ namespace FDDWeb.Admin
         {
             userLogic.UpgradeToPremium(e.CommandArgument.ToString());
             LoadUsers();
+        }
+
+        protected void UpdateSiteData(object sender, EventArgs e)
+        {
+            siteLogic.UpdateSiteData(PublishingOffer.Text, DeliveryTime.Text, MenuOfTheDay.Text);
+            LoadSiteData();
         }
     }
 }

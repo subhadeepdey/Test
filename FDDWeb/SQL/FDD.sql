@@ -756,6 +756,24 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE [UPDATE_FDD_SITE_DATA]
+@PublishingOffer [NVARCHAR](MAX),
+@DeliveryTime [NVARCHAR](MAX),
+@MenuOfTheDay [NVARCHAR](MAX)
+AS
+	BEGIN
+		UPDATE [FDD_SITE] 
+			SET [FDD_VALUE] = @PublishingOffer 
+			WHERE [FDD_KEY] = 'PUBLISHING_OFFER'
+		UPDATE [FDD_SITE] 
+			SET [FDD_VALUE] = @DeliveryTime 
+			WHERE [FDD_KEY] = 'DELIVERY_TIME'
+		UPDATE [FDD_SITE] 
+			SET [FDD_VALUE] = @MenuOfTheDay 
+			WHERE [FDD_KEY] = 'MENU_OF_THE_DAY'
+	END
+GO
+
  INSERT_USER 'Customer', '5F4DCC3B5AA765D61D8327DEB882CF99', 'Test User1','test1@FDD.com', '888-888-8881','Test Address 1',' Alternate Test Address 1', 'Customer'
  GO
  INSERT_USER 'Admin', '5F4DCC3B5AA765D61D8327DEB882CF99','Admin User1', 'admin1@FDD.com', '888-888-8882','Test Address 2',' Alternate Test Address 2', 'Admin'
