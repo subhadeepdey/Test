@@ -212,9 +212,12 @@
     <Content Include="Admin\ManageSite.aspx" />
     <Content Include="Admin\ManageMenu.aspx" />
     <Content Include="Admin\ManageOrder.aspx" />
-    <Content Include="App_Data\FDD.mdf" />
+    <Content Include="App_Data\FDD.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="App_Data\FDD_log.ldf">
       <DependentUpon>FDD.mdf</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
